@@ -26,7 +26,7 @@ class ForeignKeysForModuleUsers extends Migration
      */
     public function down()
     {
-        Schema::table('module_user', function(Blueprint $table){
+        Schema::table('module_user', function (Blueprint $table) {
             $table->dropForeign('module_user_user_id_foreign');
             $table->dropForeign('module_user_module_id_foreign');
         });
