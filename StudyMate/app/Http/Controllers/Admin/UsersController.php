@@ -34,7 +34,7 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        if(Gate::denies('edit-users')){
+        if (Gate::denies('edit-users')) {
             return redirect(route('admin.users.index'));
         }
         $roles = Role::all();
@@ -58,7 +58,12 @@ class UsersController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->save();
+
+        if ($user->save()) {
+            $request->session()->flash('success', $user->name.' has been updated.');
+        } else {
+            $request->session()->flash('error', $user->name.' could not be updated.');
+        }
 
         return redirect()->route('admin.users.index');
     }
@@ -71,7 +76,7 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        if(Gate::denies('destroy-users')){
+        if (Gate::denies('destroy-users')) {
             return redirect(route('admin.users.index'));
         }
         $user->roles()->detach();
