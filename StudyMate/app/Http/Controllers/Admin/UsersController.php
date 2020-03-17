@@ -56,6 +56,10 @@ class UsersController extends Controller
     {
         $user->roles()->sync($request->roles);
 
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+
         return redirect()->route('admin.users.index');
     }
 
