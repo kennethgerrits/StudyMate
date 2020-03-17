@@ -14,8 +14,8 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        User::truncate();
-        DB::table('role_user')->truncate();
+        DB::table('users')->delete();
+        DB::table('role_user')->delete();
 
         $adminRole = Role::where('name', 'admin')->first();
         $teacherRole = Role::where('name', 'teacher')->first();
@@ -42,9 +42,6 @@ class UsersTableSeeder extends Seeder
         $admin->roles()->attach($adminRole);
         $teacher->roles()->attach($teacherRole);
         $student->roles()->attach($studentRole);
-
-
-
 
     }
 }
