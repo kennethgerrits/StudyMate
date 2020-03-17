@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ForeignKeysForModuleUsers extends Migration
+class CreateForeignKeysForRoleModulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class ForeignKeysForModuleUsers extends Migration
     public function up()
     {
         Schema::table('module_user', function (Blueprint $table) {
+            $table->foreign('module_id')->references('id')->on('modules')->onDelete('CASCADE');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('CASCADE');
-            $table->foreign('module_id')->references('id')->on('roles')->onDelete('CASCADE');
         });
     }
 

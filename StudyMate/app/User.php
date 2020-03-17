@@ -57,4 +57,9 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function modules()
+    {
+        return $this->belongsToMany('App\Module');
+    }
 }
