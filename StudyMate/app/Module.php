@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Crypt;
 
 class Module extends Model
 {
+    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *

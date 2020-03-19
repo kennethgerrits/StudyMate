@@ -17,7 +17,6 @@ class CreateModuleUserTable extends Migration
             $table->id();
             $table->bigInteger('module_id')->unsigned();
             $table->bigInteger('user_id')->unsigned();
-            $table->timestamps();
         });
     }
 
