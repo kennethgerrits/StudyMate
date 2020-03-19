@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Module;
 use App\User;
 use App\Role;
 use Gate;
@@ -38,10 +39,12 @@ class UsersController extends Controller
             return redirect(route('admin.users.index'));
         }
         $roles = Role::all();
+        $modules = Module::all();
 
         return view('admin.users.edit')->with([
             'user' => $user,
-            'roles' => $roles
+            'roles' => $roles,
+            'modules' => $modules
         ]);
     }
 
@@ -55,6 +58,7 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         $user->roles()->sync($request->roles);
+        $user->modules()->sync($request->modules);
 
         $user->name = $request->name;
         $user->email = $request->email;
@@ -71,16 +75,23 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param Request $request
      * @param \App\User $user
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function destroy(User $user)
+    public function destroy(Request $request, User $user)
     {
         if (Gate::denies('destroy-users')) {
             return redirect(route('admin.users.index'));
         }
         $user->roles()->detach();
-        $user->delete();
+
+        if($user->delete()){
+            $request->session()->flash('success', $user->name.' has been deleted.');
+        }else {
+            $request->session()->flash('error', $user->name.' could not be deleted.');
+        }
 
         return redirect()->route('admin.users.index');
     }

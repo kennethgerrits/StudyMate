@@ -6,7 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Module extends Model
 {
-    public function users(){
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'overseer'
+    ];
+
+    public function users()
+    {
         return $this->belongsToMany('App\User');
     }
 }
