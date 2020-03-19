@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Module;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ModulesController extends Controller
 {
@@ -26,7 +27,7 @@ class ModulesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.modules.create');
     }
 
     /**
@@ -37,7 +38,15 @@ class ModulesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $module = Module::create([
+            'name' => $request['name'],
+            'overseer' => $request['overseer'],
+        ]);
+
+        $request->session()->flash('success', $module->name.' has been created.');
+
+
+        return redirect()->route('admin.modules.index');
     }
 
     /**
@@ -62,7 +71,18 @@ class ModulesController extends Controller
      */
     public function update(Request $request, Module $module)
     {
-        //
+        $module->users()->sync($request->modules);
+
+        $module->name = $request->name;
+        $module->overseer = $request->overseer;
+
+        if ($module->save()) {
+            $request->session()->flash('success', $module->name.' has been updated.');
+        } else {
+            $request->session()->flash('error', $module->name.' could not be updated.');
+        }
+
+        return redirect()->route('admin.modules.index');
     }
 
     /**
@@ -79,7 +99,7 @@ class ModulesController extends Controller
 
         if ($module->delete()) {
             $request->session()->flash('success', $module->name.' has been deleted.');
-        } else{
+        } else {
             $request->session()->flash('error', $module->name.' could not be deleted.');
         }
 
