@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Crypt;
 
 class User extends Authenticatable
 {
@@ -61,5 +62,15 @@ class User extends Authenticatable
     public function modules()
     {
         return $this->belongsToMany('App\Module');
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = Crypt::encryptString($value);
+    }
+
+    public function getNameAttribute($value)
+    {
+        return Crypt::decryptString($value);
     }
 }
