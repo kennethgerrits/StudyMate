@@ -16,8 +16,14 @@ class CreateModulesTable extends Migration
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('overseer');
-            $table->string('taught_by');
+            $table->int('overseer');
+            $table->int('taught_by');
+            $table->int('followed_by');
+            $table->int('block_id');
+            $table->int('period_id');
+            $table->date('year');
+            $table->int('study_points');
+            $table->boolean('is_finished');
         });
     }
 
