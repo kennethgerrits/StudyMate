@@ -12,7 +12,7 @@ class Module extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'overseer'
+        'name', 'overseer', 'taught_by'
     ];
 
     public function users()

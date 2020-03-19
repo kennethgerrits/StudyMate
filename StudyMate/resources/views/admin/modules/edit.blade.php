@@ -16,7 +16,7 @@
                                 <label for="name" class="col-md-2 col-form-label text-md-right">Name</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $module->name }}" required autocomplete="email" autofocus>
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $module->name }}" required autocomplete="name" autofocus>
 
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -30,9 +30,23 @@
                                 <label for="overseer" class="col-md-2 col-form-label text-md-right">Overseer</label>
 
                                 <div class="col-md-6">
-                                    <input id="overseer" type="text" class="form-control @error('overseer') is-invalid @enderror" name="overseer" value="{{ $module->overseer }}" required autocomplete="email" autofocus>
+                                    <input id="overseer" type="text" class="form-control @error('overseer') is-invalid @enderror" name="overseer" value="{{ $module->overseer }}" required autocomplete="overseer" autofocus>
 
                                     @error('overseer')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="taught_by" class="col-md-2 col-form-label text-md-right">Taught by</label>
+
+                                <div class="col-md-6">
+                                    <input id="taught_by" type="text" class="form-control @error('taught_by') is-invalid @enderror" name="taught_by" value="{{ $module->taught_by }}" required autocomplete="taught_by" autofocus>
+
+                                    @error('taught_by')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

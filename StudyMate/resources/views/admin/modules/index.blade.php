@@ -7,11 +7,11 @@
                 <div class="card">
                     <div class="card-header">
                         Modules
-                    <div class="float-right">
-                        <a href="{{route('admin.modules.create')}}">
-                            <button type="button" class="btn btn-primary float-left">New</button>
-                        </a>
-                    </div>
+                        <div class="float-right">
+                            <a href="{{route('admin.modules.create')}}">
+                                <button type="button" class="btn btn-primary float-left">New</button>
+                            </a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <table class="table">
@@ -20,6 +20,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Overseer</th>
+                                <th scope="col">Taught by</th>
                                 <th scope="col">Actions</th>
                             </tr>
                             </thead>
@@ -29,6 +30,7 @@
                                     <th scope="row">{{$module->id}}</th>
                                     <td>{{$module->name}}</td>
                                     <td>{{$module->overseer}}</td>
+                                    <td>{{$module->taught_by}}</td>
                                     <td>
                                         <a href="{{route('admin.modules.edit', $module->id)}}">
                                             <button type="button" class="btn btn-primary float-left">Edit</button>
