@@ -75,16 +75,23 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
+     * @param Request $request
      * @param \App\User $user
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function destroy(User $user)
+    public function destroy(Request $request, User $user)
     {
         if (Gate::denies('destroy-users')) {
             return redirect(route('admin.users.index'));
         }
         $user->roles()->detach();
-        $user->delete();
+
+        if($user->delete()){
+            $request->session()->flash('success', $user->name.' has been deleted.');
+        }else {
+            $request->session()->flash('error', $user->name.' could not be deleted.');
+        }
 
         return redirect()->route('admin.users.index');
     }
