@@ -8,6 +8,7 @@ use App\User;
 use App\Role;
 use Gate;
 use Illuminate\Http\Request;
+use function Sodium\add;
 
 class UsersController extends Controller
 {
@@ -24,6 +25,16 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::all();
+
+        /*        swap variables if you only want teachers
+
+                $teachers = collect();
+                foreach ($users as $user){
+                    if($user->hasRole('teacher')){
+                        $teachers->push($user);
+                    }
+                }*/
+
         return view('admin.users.index')->with('users', $users);
     }
 
@@ -87,9 +98,9 @@ class UsersController extends Controller
         }
         $user->roles()->detach();
 
-        if($user->delete()){
+        if ($user->delete()) {
             $request->session()->flash('success', $user->name.' has been deleted.');
-        }else {
+        } else {
             $request->session()->flash('error', $user->name.' could not be deleted.');
         }
 

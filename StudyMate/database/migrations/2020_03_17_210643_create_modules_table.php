@@ -17,7 +17,7 @@ class CreateModulesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('overseer');
-            $table->timestamps();
+            $table->string('taught_by');
         });
     }
 

@@ -47,7 +47,7 @@
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong> Your password must be more than 6 characters long and contain at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character.</strong>
                                     </span>
                                 @enderror
                             </div>

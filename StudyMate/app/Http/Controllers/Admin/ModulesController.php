@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Module;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class ModulesController extends Controller
 {
@@ -41,10 +40,11 @@ class ModulesController extends Controller
         $module = Module::create([
             'name' => $request['name'],
             'overseer' => $request['overseer'],
+            'taught_by' => $request['taught_by'],
+
         ]);
 
         $request->session()->flash('success', $module->name.' has been created.');
-
 
         return redirect()->route('admin.modules.index');
     }
@@ -75,6 +75,7 @@ class ModulesController extends Controller
 
         $module->name = $request->name;
         $module->overseer = $request->overseer;
+        $module->taught_by = $request->taught_by;
 
         if ($module->save()) {
             $request->session()->flash('success', $module->name.' has been updated.');

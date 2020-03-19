@@ -13,19 +13,21 @@ class ModulesTableSeeder extends Seeder
     public function run()
     {
         DB::table('modules')->delete();
-       // DB::table('module_users')->delete();
 
         Module::create([
             'name' => 'DB1',
-            'overseer' => 'Bart G'
+            'overseer' => 'Bart G',
+            'taught_by' => 'Jeroen'
         ]);
         Module::create([
             'name' => 'PROG6',
-            'overseer' => 'Stijn S'
+            'overseer' => 'Stijn S',
+            'taught_by' => 'Jasper'
         ]);
         Module::create([
             'name' => 'DPINT',
-            'overseer' => 'Martijn S'
+            'overseer' => 'Martijn S',
+            'taught_by' => 'Bob'
         ]);
     }
 }
