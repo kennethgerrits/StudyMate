@@ -29,15 +29,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-
     public function roles()
     {
         return $this->belongsToMany('App\Role');
@@ -64,12 +55,23 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Module');
     }
 
+    /*Encryption Mutators*/
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = Crypt::encryptString($value);
     }
 
     public function getNameAttribute($value)
+    {
+        return Crypt::decryptString($value);
+    }
+
+    public function setEmailAttribute($value)
+    {
+        $this->attributes['email'] = Crypt::encryptString($value);
+    }
+
+    public function getEmailAttribute($value)
     {
         return Crypt::decryptString($value);
     }
