@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Role;
+use App\Module;
 
 class UsersTableSeeder extends Seeder
 {
@@ -20,6 +21,8 @@ class UsersTableSeeder extends Seeder
         $adminRole = Role::where('name', 'admin')->first();
         $teacherRole = Role::where('name', 'teacher')->first();
         $studentRole = Role::where('name', 'student')->first();
+
+        $db1Module = Module::where('name', 'DB1')->first();
 
         $admin = User::create([
             'name' => 'Admin user',
@@ -41,6 +44,7 @@ class UsersTableSeeder extends Seeder
 
         $admin->roles()->attach($adminRole);
         $teacher->roles()->attach($teacherRole);
+        $teacher->modules()->attach($db1Module);
         $student->roles()->attach($studentRole);
 
     }

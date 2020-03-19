@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Module;
 use App\User;
 use App\Role;
 use Gate;
@@ -38,10 +39,12 @@ class UsersController extends Controller
             return redirect(route('admin.users.index'));
         }
         $roles = Role::all();
+        $modules = Module::all();
 
         return view('admin.users.edit')->with([
             'user' => $user,
-            'roles' => $roles
+            'roles' => $roles,
+            'modules' => $modules
         ]);
     }
 
@@ -55,6 +58,7 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         $user->roles()->sync($request->roles);
+        $user->modules()->sync($request->modules);
 
         $user->name = $request->name;
         $user->email = $request->email;
