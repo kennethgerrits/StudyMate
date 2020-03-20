@@ -13,7 +13,7 @@ class CreatePeriodTable extends Migration
      */
     public function up()
     {
-        Schema::create('period', function (Blueprint $table) {
+        Schema::create('periods', function (Blueprint $table) {
             $table->id();
         });
     }
@@ -25,6 +25,6 @@ class CreatePeriodTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('period');
+        Schema::dropIfExists('periods');
     }
 }

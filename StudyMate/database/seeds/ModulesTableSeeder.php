@@ -15,14 +15,12 @@ class ModulesTableSeeder extends Seeder
     {
         DB::table('modules')->delete();
 
-        $users = \App\User::get();
-        $overseer = User::get();
 
         Module::create([
             'name' => 'DB1',
-            'overseer' => 1,
-            'taught_by' => 2,
-            'followed_by' => 3,
+            'overseer' =>2,
+            'taught_by' => 3,
+            'followed_by' => 4,
             'block_id' => 2,
             'period_id' => 2,
             'year' => Carbon::parse('2020'),
@@ -45,7 +43,7 @@ class ModulesTableSeeder extends Seeder
             'overseer' => 2,
             'taught_by' => 3,
             'followed_by' => 4,
-            'block_id' => 6,
+            'block_id' => 3,
             'period_id' => 2,
             'year' => Carbon::parse('2021'),
             'study_points' => 2,

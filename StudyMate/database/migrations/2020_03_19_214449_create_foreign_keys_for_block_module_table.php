@@ -14,7 +14,7 @@ class CreateForeignKeysForBlockModuleTable extends Migration
     public function up()
     {
         Schema::table('modules', function (Blueprint $table) {
-            $table->foreign('block_id')->references('id')->on('block')->onDelete('CASCADE');
+            $table->foreign('block_id')->references('id')->on('blocks')->onDelete('CASCADE');
         });
     }
 

@@ -14,7 +14,7 @@ class CreateForeignKeysForPeriodModulesTable extends Migration
     public function up()
     {
         Schema::table('modules', function (Blueprint $table) {
-            $table->foreign('period_id')->references('id')->on('period')->onDelete('CASCADE');
+            $table->foreign('period_id')->references('id')->on('periods')->onDelete('CASCADE');
         });
     }
 

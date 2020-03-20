@@ -23,6 +23,14 @@ class Module extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function overseer(){
+        return $this->belongsTo('App\User', 'overseer');
+    }
+    public function teacher(){
+        return $this->belongsTo('App\User', 'taught_by');
+    }
+
+
     /*Encryption Mutators*/
     public function setNameAttribute($value)
     {
@@ -30,26 +38,6 @@ class Module extends Model
     }
 
     public function getNameAttribute($value)
-    {
-        return Crypt::decryptString($value);
-    }
-
-    public function setOverseerAttribute($value)
-    {
-        $this->attributes['overseer'] = Crypt::encryptString($value);
-    }
-
-    public function getOverseerAttribute($value)
-    {
-        return Crypt::decryptString($value);
-    }
-
-    public function setTaughtByAttribute($value)
-    {
-        $this->attributes['taught_by'] = Crypt::encryptString($value);
-    }
-
-    public function getTaughtByAttribute($value)
     {
         return Crypt::decryptString($value);
     }
