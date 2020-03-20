@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-">
         <div class="d-flex flex-column">
-            <h3>Voortgang dit blok</h3>
+            <h3>Progression this block</h3>
             <div class="progress margin-bottom">
                 <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" id="bar"></div>
             </div>
