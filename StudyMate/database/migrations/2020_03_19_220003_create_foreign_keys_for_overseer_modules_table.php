@@ -13,7 +13,7 @@ class CreateForeignKeysForOverseerModulesTable extends Migration
      */
     public function up()
     {
-        Schema::table('module', function (Blueprint $table) {
+        Schema::table('modules', function (Blueprint $table) {
             $table->foreign('overseer')->references('id')->on('users')->onDelete('CASCADE');
         });
     }

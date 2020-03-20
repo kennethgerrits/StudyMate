@@ -15,6 +15,9 @@ class ModulesTableSeeder extends Seeder
     {
         DB::table('modules')->delete();
 
+        $users = \App\User::get();
+        $overseer = User::get();
+
         Module::create([
             'name' => 'DB1',
             'overseer' => 1,

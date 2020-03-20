@@ -13,7 +13,7 @@ class CreateForeignKeysForUsersModulesTable extends Migration
      */
     public function up()
     {
-        Schema::table('module', function (Blueprint $table) {
+        Schema::table('modules', function (Blueprint $table) {
             $table->foreign('followed_by')->references('id')->on('users')->onDelete('CASCADE');
         });
     }
