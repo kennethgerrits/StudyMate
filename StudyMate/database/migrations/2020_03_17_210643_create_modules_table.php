@@ -18,7 +18,7 @@ class CreateModulesTable extends Migration
             $table->string('name');
             $table->unsignedBigInteger('overseer');
             $table->unsignedBigInteger('taught_by');
-            $table->unsignedBigInteger('followed_by');
+            $table->unsignedBigInteger('followed_by')->nullable();
             $table->unsignedBigInteger('block_id');
             $table->unsignedBigInteger('period_id');
             $table->date('year');

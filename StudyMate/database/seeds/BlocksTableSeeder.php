@@ -13,7 +13,7 @@ class BlocksTableSeeder extends Seeder
     {
         DB::table('blocks')->delete();
 
-        for($i = 0; $i<4; $i++){
+        for($i = 0; $i<12; $i++){
         Block::create();
     }
 

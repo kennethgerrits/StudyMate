@@ -49,5 +49,58 @@ class ModulesTableSeeder extends Seeder
             'study_points' => 2,
             'is_finished' => false
         ]);
+        Module::create([
+            'name' => 'PROJ5',
+            'overseer' => 5,
+            'taught_by' => 5,
+            'followed_by' => 4,
+            'block_id' => 5,
+            'period_id' => 1,
+            'year' => Carbon::parse('2021'),
+            'study_points' => 4,
+            'is_finished' => false
+        ]);
+        Module::create([
+            'name' => 'ECOME',
+            'overseer' => 3,
+            'taught_by' => 6,
+            'followed_by' => 4,
+            'block_id' => 5,
+            'period_id' => 1,
+            'year' => Carbon::parse('2021'),
+            'study_points' => 1,
+            'is_finished' => true
+        ]);
+        Module::create([
+            'name' => 'PROG5',
+            'overseer' => 5,
+            'taught_by' => 2,
+            'followed_by' => 4,
+            'block_id' => 5,
+            'period_id' => 1,
+            'year' => Carbon::parse('2021'),
+            'study_points' => 3,
+            'is_finished' => true
+        ]);
+        Module::create([
+            'name' => 'Unity',
+            'overseer' => 6,
+            'taught_by' => 3,
+            'block_id' => 8,
+            'period_id' => 4,
+            'year' => Carbon::parse('2021'),
+            'study_points' => 2,
+            'is_finished' => false
+        ]);
+        Module::create([
+            'name' => 'SWEN5',
+            'overseer' => 6,
+            'taught_by' => 3,
+            'block_id' => 9,
+            'period_id' => 1,
+            'year' => Carbon::parse('2021'),
+            'study_points' => 3,
+            'is_finished' => false
+        ]);
     }
 }

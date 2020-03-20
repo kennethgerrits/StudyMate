@@ -3,12 +3,13 @@
 @section('content')
     <div class="container-">
         <div class="d-flex flex-column">
+            <h3>Voortgang dit blok</h3>
             <div class="progress margin-bottom">
                 <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" id="bar"></div>
             </div>
             <div class="row col-md-12">
                 <div class="list-group col-md-5">
-                    <input id="modules" type="hidden" value="{{ $guest->modules()->get()->toJson() }}">
+                    <input id="modules" type="hidden" value="{{ $modules->toJson() }}">
                     <h5>Schoolyear {{\Carbon\Carbon::now()->year}}</h5>
                     <div class="btn-group margin-bottom" role="group">
                         @for($i = 1; $i<=4;$i++)
@@ -27,7 +28,7 @@
                     <div id="here_table"></div>
                 </div>
                 <div class="col-md-3">
-                    <h3>All modules</h3>
+                    <h3>All followed modules</h3>
                     <table class="table">
                         <thead>
                         <tr>
@@ -56,7 +57,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($guest->modules()->get() as $module)
+                        @foreach($guest->modules()->where('block_id', '=', '5')->get() as $module)
                             @if($module->is_finished)
                                 <tr>
                                     <th>{{$module->name}}</th>
@@ -75,7 +76,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($guest->modules()->get() as $module)
+                        @foreach($guest->modules()->where('block_id', '=', '5')->get() as $module)
                             @if(!$module->is_finished)
                                 <tr>
                                     <th>{{$module->name}}</th>
@@ -113,12 +114,6 @@
                     }
                 });
             }
-            // let finishedCount = 0;
-            // $.each(modules, function (counter, module) {
-            //     if(module.is_finished){
-            //         finishedCount++;
-            //     }
-            // });
             $('#bar').width({{$achieved/$potential*100}} + '%');
             $('#bar').text({{$achieved}} + " EC")
         })

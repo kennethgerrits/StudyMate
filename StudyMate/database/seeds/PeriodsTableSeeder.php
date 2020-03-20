@@ -14,7 +14,7 @@ class PeriodsTableSeeder extends Seeder
     {
         DB::table('periods')->delete();
 
-        for($i = 0; $i<12; $i++){
+        for($i = 0; $i<4; $i++){
             Period::create();
         }
     }
