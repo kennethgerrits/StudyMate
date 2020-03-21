@@ -30,8 +30,17 @@
                                 <label for="overseer" class="col-md-2 col-form-label text-md-right">Overseer</label>
 
                                 <div class="col-md-6">
-                                    <input id="overseer" type="text" class="form-control @error('overseer') is-invalid @enderror" name="overseer" value="{{ $module->overseer }}" required autocomplete="overseer" autofocus>
+                                    <select class="form-control" name="overseer">
+                                    <option value="{{$module->overseer}}">{{$module->overseer()->first()->name}}</option>
 
+                                    @foreach ($teachers as $teacher)
+                                        @if($teacher->id != $module->overseer)
+                                            <option value="{{ $teacher->id}}">
+                                                {{ $teacher->name }}
+                                            </option>
+                                        @endif
+                                    @endforeach
+                                    </select>
                                     @error('overseer')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -43,9 +52,19 @@
                             <div class="form-group row">
                                 <label for="taught_by" class="col-md-2 col-form-label text-md-right">Taught by</label>
 
-                                <div class="col-md-6">
-                                    <input id="taught_by" type="text" class="form-control @error('taught_by') is-invalid @enderror" name="taught_by" value="{{ $module->taught_by }}" required autocomplete="taught_by" autofocus>
+                                <div class="col-md-6 ">
+                                    <select class="form-control" name="taught_by">
 
+                                        <option value="{{$module->taught_by}}">{{$module->teacher()->first()->name}}</option>
+
+                                        @foreach ($teachers as $teacher)
+                                            @if($teacher->id != $module->taught_by)
+                                            <option value="{{ $teacher->id}}">
+                                                {{ $teacher->name }}
+                                            </option>
+                                            @endif
+                                        @endforeach
+                                    </select>
                                     @error('taught_by')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

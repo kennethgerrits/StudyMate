@@ -29,7 +29,14 @@
                                 <label for="overseer" class="col-md-4 col-form-label text-md-right">{{ __('Overseer') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="overseer" type="text" class="form-control @error('overseer') is-invalid @enderror" name="overseer" value="{{ old('overseer') }}" required autocomplete="overseer">
+                                    <select class="form-control" name="overseer">
+                                        <option>Select a overseer</option>
+                                        @foreach ($teachers as $teacher)
+                                                <option value="{{ $teacher->id}}">
+                                                    {{ $teacher->name }}
+                                                </option>
+                                        @endforeach
+                                    </select>
 
                                     @error('overseer')
                                     <span class="invalid-feedback" role="alert">
@@ -43,7 +50,14 @@
                                 <label for="taught_by" class="col-md-4 col-form-label text-md-right">{{ __('Taught by') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="taught_by" type="text" class="form-control @error('taught_by') is-invalid @enderror" name="taught_by" value="{{ old('taught_by') }}" required autocomplete="taught_by">
+                                    <select class="form-control" name="overseer">
+                                        <option>Select a teacher</option>
+                                        @foreach ($teachers as $teacher)
+                                            <option value="{{ $teacher->id}}">
+                                                {{ $teacher->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
 
                                     @error('taught_by')
                                     <span class="invalid-feedback" role="alert">

@@ -52,7 +52,7 @@ class User extends Authenticatable
 
     public function modules()
     {
-        return $this->belongsToMany('App\Module');
+        return $this->hasMany('App\Module', 'followed_by', 'id');
     }
 
     /*Encryption Mutators*/

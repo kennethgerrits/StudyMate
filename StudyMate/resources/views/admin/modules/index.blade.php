@@ -29,8 +29,8 @@
                                 <tr>
                                     <th scope="row">{{$module->id}}</th>
                                     <td>{{$module->name}}</td>
-                                    <td>{{$module->overseer}}</td>
-                                    <td>{{$module->taught_by}}</td>
+                                    <td>{{$module->overseer()->first()->name}}</td>
+                                    <td>{{$module->teacher()->first()->name}}</td>
                                     <td>
                                         <a href="{{route('admin.modules.edit', $module->id)}}">
                                             <button type="button" class="btn btn-primary float-left">Edit</button>
