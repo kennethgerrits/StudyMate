@@ -8,7 +8,6 @@ use App\User;
 use App\Role;
 use Gate;
 use Illuminate\Http\Request;
-use function Sodium\add;
 
 class UsersController extends Controller
 {
@@ -35,7 +34,7 @@ class UsersController extends Controller
                     }
                 }*/
 
-        return view('admin.users.index',['users' => $users]);
+        return view('admin.users.index', ['users' => $users]);
     }
 
     /**
@@ -70,6 +69,29 @@ class UsersController extends Controller
     {
         $user->name = $request->name;
         $user->email = $request->email;
+
+        $user->roles()->sync($request->roles);
+
+        $isTeacher = $user->hasRole('teacher');
+        Module::when($user, function ($q) use ($user) {
+            if ($user->hasRole('teacher')) {
+                return $q->where('taught_by', '=', $user->id)->update(['taught_by' => null]);
+            } else {
+                return $q->where('followed_by', '=', $user->id)->update(['followed_by' => null]);
+
+            }
+        });
+
+        foreach ($request->modules as $module) {
+            $target = Module::where('id', '=', $module)->first();
+
+            if ($user->hasRole('teacher')) {
+                $target->taught_by = $user->id;
+            } else {
+                $target->followed_by = $user->id;
+            }
+            $target->save();
+        }
 
         if ($user->save()) {
             $request->session()->flash('success', $user->name.' has been updated.');

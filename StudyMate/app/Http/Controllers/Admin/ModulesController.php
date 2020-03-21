@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Block;
 use App\Http\Controllers\Controller;
 use App\Module;
+use App\Period;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -34,8 +36,14 @@ class ModulesController extends Controller
                 $teachers->push($user);
             }
         }
+
+        $blocks = Block::all();
+        $periods = Period::all();
+
         return view('admin.modules.create',[
-            'teachers' => $teachers
+            'teachers' => $teachers,
+            'blocks' => $blocks,
+            'periods' => $periods
         ]);
     }
 
@@ -51,7 +59,10 @@ class ModulesController extends Controller
             'name' => $request['name'],
             'overseer' => $request['overseer'],
             'taught_by' => $request['taught_by'],
-
+            'block_id' =>$request['block_id'],
+            'period_id' =>$request['period_id'],
+            'study_points' => $request['study_points'],
+            'is_finished' => $request['is_finished'],
         ]);
 
         $request->session()->flash('success', $module->name.' has been created.');
@@ -74,9 +85,15 @@ class ModulesController extends Controller
                       $teachers->push($user);
                   }
               }
+
+        $blocks = Block::all();
+        $periods = Period::all();
+
         return view('admin.modules.edit')->with([
             'module' => $module,
-            'teachers' => $teachers
+            'teachers' => $teachers,
+            'blocks' => $blocks,
+            'periods' => $periods
         ]);
     }
 
@@ -94,6 +111,11 @@ class ModulesController extends Controller
         $module->name = $request->name;
         $module->overseer = $request->overseer;
         $module->taught_by = $request->taught_by;
+        $module->block_id = $request->block_id;
+        $module->period_id = $request->period_id;
+        $module->study_points = $request->study_points;
+        $module->is_finished = $request->is_finished;
+
 
         if ($module->save()) {
             $request->session()->flash('success', $module->name.' has been updated.');
@@ -114,8 +136,6 @@ class ModulesController extends Controller
      */
     public function destroy(Request $request, Module $module)
     {
-        $module->users()->detach();
-
         if ($module->delete()) {
             $request->session()->flash('success', $module->name.' has been deleted.');
         } else {

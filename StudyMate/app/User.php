@@ -55,6 +55,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Module', 'followed_by', 'id');
     }
 
+    public function teacherModules(){
+        return $this->hasMany('App\Module', 'taught_by', 'id');
+    }
+
     /*Encryption Mutators*/
     public function setNameAttribute($value)
     {

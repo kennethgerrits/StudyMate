@@ -14,7 +14,8 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Roles</th>
-                                <th scope="col">Modules</th>
+                                <th scope="col">Teacher Modules</th>
+                                <th scope="col">Student Modules</th>
                                 <th scope="col">Actions</th>
                             </tr>
                             </thead>
@@ -25,6 +26,7 @@
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>{{implode(', ', $user->roles()->get()->pluck('name')->toArray())}}</td>
+                                    <td>{{implode(', ', $user->teacherModules()->get()->pluck('name')->toArray())}}</td>
                                     <td>{{implode(', ', $user->modules()->get()->pluck('name')->toArray())}}</td>
                                     <td>
                                         <a href="{{route('admin.users.edit', $user->id)}}">

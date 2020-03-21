@@ -15,7 +15,7 @@ class Module extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'overseer', 'taught_by'
+        'name', 'overseer', 'taught_by', 'period_id', 'block_id', 'year', 'study_points', 'is_finished'
     ];
 
     public function user()

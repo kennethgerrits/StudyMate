@@ -60,14 +60,29 @@
                                     @foreach($modules as $module)
                                         <div class="form-check">
                                             <input type="checkbox" name="modules[]" value="{{$module->id}}"
-                                                   @if($user->modules->pluck('id')->contains($module->id)) checked @endif
-                                            >
+                                                   @if($user->teacherModules->pluck('id')->contains($module->id)) checked @endif>
                                             <label>{{$module->name}}</label>
                                         </div>
                                     @endforeach
                                 </div>
                             </div>
                             @endif
+
+                            @if($user->hasRole('guest'))
+                                <div class="form-group row">
+                                    <label for="modules" class="col-md-2 col-form-label text-md-right">Modules</label>
+                                    <div class="col-md-6">
+                                        @foreach($modules as $module)
+                                            <div class="form-check">
+                                                <input type="checkbox" name="modules[]" value="{{$module->id}}"
+                                                       @if($user->modules->pluck('id')->contains($module->id)) checked @endif>
+                                                <label>{{$module->name}}</label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
+
                             <button type="submit" class="btn btn-primary">Update</button>
                         </form>
                     </div>
