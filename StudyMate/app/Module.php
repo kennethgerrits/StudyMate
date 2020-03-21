@@ -30,6 +30,10 @@ class Module extends Model
         return $this->belongsTo('App\User', 'taught_by');
     }
 
+    public function exams(){
+        return $this->belongsToMany('App\Exam');
+    }
+
 
     /*Encryption Mutators*/
     public function setNameAttribute($value)
