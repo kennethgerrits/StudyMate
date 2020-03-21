@@ -19,9 +19,9 @@
                                     Period {{$i}}
                                 </button>
                                 <div class="dropdown-menu">
-                                    <button type="button" class="btn dropdown-item" id="btn{{$i}}" onclick="window.location.href = '{{ route('dashboard_details', ['block' => $i]) }}'">Block {{$i}}</button>
-                                    <button type="button" class="btn dropdown-item" id="btn{{$i+4}}" onclick="window.location.href = '{{ route('dashboard_details', ['block' => $i+4]) }}'">Block {{$i+4}}</button>
-                                    <button type="button" class="btn dropdown-item" id="btn{{$i+8}}" onclick="window.location.href = '{{ route('dashboard_details', ['block' => $i+8]) }}'">Block {{$i+8}}</button>
+                                    <button type="button" class="btn dropdown-item" id="btn{{$i}}" onclick="window.location.href = '{{ route('getDashboardDetails', ['block' => $i]) }}'">Block {{$i}}</button>
+                                    <button type="button" class="btn dropdown-item" id="btn{{$i+4}}" onclick="window.location.href = '{{ route('getDashboardDetails', ['block' => $i+4]) }}'">Block {{$i+4}}</button>
+                                    <button type="button" class="btn dropdown-item" id="btn{{$i+8}}" onclick="window.location.href = '{{ route('getDashboardDetails', ['block' => $i+8]) }}'">Block {{$i+8}}</button>
                                 </div>
                             </div>
                         @endfor
@@ -54,8 +54,8 @@
 @push('scripts')
     <script>
         $(document).ready(function () {
-            $('#bar').width({{$achieved/$potential*100}} + '%');
-            $('#bar').text({{$achieved}} + " EC")
+            $('#bar').width({{$achievedEC/$maxEC*100}} + '%');
+            $('#bar').text({{$achievedEC}} + " EC")
         })
     </script>
 @endpush

@@ -20,8 +20,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-Route::get('/dashboard/{block}', 'DashboardController@details')->name('dashboard_details');
+Route::prefix('dashboard')->group(function(){
+    Route::get('/', 'DashboardController@index')->name('getDashboardIndex');
+    Route::get('/{block}', 'DashboardController@details')->name('getDashboardDetails');
+});
+
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']])->middleware('can:manage-users');

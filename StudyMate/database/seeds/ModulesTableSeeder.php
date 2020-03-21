@@ -23,7 +23,6 @@ class ModulesTableSeeder extends Seeder
             'followed_by' => 4,
             'block_id' => 2,
             'period_id' => 2,
-            'year' => Carbon::parse('2020'),
             'study_points' => 4,
             'is_finished' => false
         ]);
@@ -34,7 +33,6 @@ class ModulesTableSeeder extends Seeder
             'followed_by' => 4,
             'block_id' => 1,
             'period_id' => 1,
-            'year' => Carbon::parse('2020'),
             'study_points' => 4,
             'is_finished' => true
         ]);
@@ -45,7 +43,6 @@ class ModulesTableSeeder extends Seeder
             'followed_by' => 4,
             'block_id' => 3,
             'period_id' => 2,
-            'year' => Carbon::parse('2021'),
             'study_points' => 2,
             'is_finished' => false
         ]);
@@ -56,7 +53,6 @@ class ModulesTableSeeder extends Seeder
             'followed_by' => 4,
             'block_id' => 5,
             'period_id' => 1,
-            'year' => Carbon::parse('2021'),
             'study_points' => 4,
             'is_finished' => false
         ]);
@@ -67,7 +63,6 @@ class ModulesTableSeeder extends Seeder
             'followed_by' => 4,
             'block_id' => 5,
             'period_id' => 1,
-            'year' => Carbon::parse('2021'),
             'study_points' => 1,
             'is_finished' => true
         ]);
@@ -78,7 +73,6 @@ class ModulesTableSeeder extends Seeder
             'followed_by' => 4,
             'block_id' => 5,
             'period_id' => 1,
-            'year' => Carbon::parse('2021'),
             'study_points' => 3,
             'is_finished' => true
         ]);
@@ -88,7 +82,6 @@ class ModulesTableSeeder extends Seeder
             'taught_by' => 3,
             'block_id' => 8,
             'period_id' => 4,
-            'year' => Carbon::parse('2021'),
             'study_points' => 2,
             'is_finished' => false
         ]);
@@ -98,7 +91,6 @@ class ModulesTableSeeder extends Seeder
             'taught_by' => 3,
             'block_id' => 9,
             'period_id' => 1,
-            'year' => Carbon::parse('2021'),
             'study_points' => 3,
             'is_finished' => false
         ]);

@@ -21,7 +21,6 @@ class CreateModulesTable extends Migration
             $table->unsignedBigInteger('followed_by')->nullable();
             $table->unsignedBigInteger('block_id');
             $table->unsignedBigInteger('period_id');
-            $table->date('year');
             $table->integer('study_points');
             $table->boolean('is_finished');
         });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Module;
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -10,41 +11,45 @@ class DashboardController extends Controller
 {
 
     public function index(){
-        $guest = User::where('id', '=', '4')->first();
+        $guest = User::wherehas('roles', function ($query){
+            $query->where('role_id','=', Role::GUEST);
+        })->first();
         $modules = Module::all();
-        $potential = 0;
-        $achieved = 0;
+        $maxEC = 0;
+        $achievedEC = 0;
         foreach ($guest->modules()->get() as $module){
-            $potential += $module->study_points;
+            $maxEC += $module->study_points;
             if($module->is_finished){
-                $achieved += $module->study_points;
+                $achievedEC += $module->study_points;
             }
         }
 
-        return view('dashboard',[
+        return view('dashboard.dashboard',[
             'guest' => $guest,
-            'potential' => $potential,
-            'achieved' => $achieved,
+            'maxEC' => $maxEC,
+            'achievedEC' => $achievedEC,
             'modules' => $modules
         ]);
     }
 
     public function details($block_id){
-        $guest = User::where('id', '=', '4')->first();
+        $guest = User::wherehas('roles', function ($query){
+            $query->where('role_id','=', Role::GUEST);
+        })->first();
         $modules = Module::all();
-        $potential = 0;
-        $achieved = 0;
+        $maxEC = 0;
+        $achievedEC = 0;
         foreach ($guest->modules()->where('block_id', '=', $block_id)->get() as $module){
-            $potential += $module->study_points;
+            $maxEC += $module->study_points;
             if($module->is_finished){
-                $achieved += $module->study_points;
+                $achievedEC += $module->study_points;
             }
         }
 
-        return view('dashboarddetails',[
+        return view('dashboard.dashboarddetails',[
             'guest' => $guest,
-            'potential' => $potential,
-            'achieved' => $achieved,
+            'maxEC' => $maxEC,
+            'achievedEC' => $achievedEC,
             'modules' => $modules,
             'id' => $block_id
         ]);

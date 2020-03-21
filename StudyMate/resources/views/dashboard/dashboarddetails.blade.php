@@ -9,13 +9,12 @@
             </div>
             <hr class="col-md-11 gray-border align-self-md-center">
             <div class="margin-bottom-small">
-                <button type="button" onclick="window.location.href = '{{ route('dashboard') }}'" class="btn btn-sm btn-secondary">
+                <button type="button" onclick="window.location.href = '{{ route('getDashboardIndex') }}'" class="btn btn-sm btn-secondary">
                     Back to overview
                 </button>
             </div>
             <div class="row col-md-12">
                 <div class="list-group col-md-5">
-                    {{--                    <input id="modules" type="hidden" value="{{ $modules->toJson() }}">--}}
                     <h5>Schoolyear {{\Carbon\Carbon::now()->year}}</h5>
                     <div class="btn-group margin-bottom" role="group">
                         @for($i = 1; $i<=4;$i++)
@@ -24,9 +23,9 @@
                                     Period {{$i}}
                                 </button>
                                 <div class="dropdown-menu">
-                                    <button type="button" class="btn dropdown-item" id="btn{{$i}}" onclick="window.location.href = '{{ route('dashboard_details', ['block' => $i]) }}'">Block {{$i}}</button>
-                                    <button type="button" class="btn dropdown-item" id="btn{{$i+4}}" onclick="window.location.href = '{{ route('dashboard_details', ['block' => $i+4]) }}'">Block {{$i+4}}</button>
-                                    <button type="button" class="btn dropdown-item" id="btn{{$i+8}}" onclick="window.location.href = '{{ route('dashboard_details', ['block' => $i+8]) }}'">Block {{$i+8}}</button>
+                                    <button type="button" class="btn dropdown-item" id="btn{{$i}}" onclick="window.location.href = '{{ route('getDashboardDetails', ['block' => $i]) }}'">Block {{$i}}</button>
+                                    <button type="button" class="btn dropdown-item" id="btn{{$i+4}}" onclick="window.location.href = '{{ route('getDashboardDetails', ['block' => $i+4]) }}'">Block {{$i+4}}</button>
+                                    <button type="button" class="btn dropdown-item" id="btn{{$i+8}}" onclick="window.location.href = '{{ route('getDashboardDetails', ['block' => $i+8]) }}'">Block {{$i+8}}</button>
                                 </div>
                             </div>
                         @endfor
@@ -73,7 +72,7 @@
                     </table>
                 </div>
                 <div class="col-md-4">
-                    @if($potential != 0)
+                    @if($maxEC != 0)
                         <h3>Block summary</h3>
                         <h4>Passed modules</h4>
                         <table class="table">
@@ -113,7 +112,7 @@
                             @endforeach
                             </tbody>
                         </table>
-                        <p>You have obtained {{$achieved}} out of the maximum of {{$potential}} studypoints</p>
+                        <p>You have obtained {{$achievedEC}} out of the maximum of {{$maxEC}} studypoints</p>
                     @else
                         <h2>You did not sign in for any module this block!</h2>
                     @endif
@@ -125,9 +124,9 @@
 @push('scripts')
     <script>
         $(document).ready(function () {
-            @if($potential != 0)
-            $('#bar').width({{$achieved/$potential*100}} +'%');
-            $('#bar').text({{$achieved}} +" EC")
+            @if($maxEC != 0)
+            $('#bar').width({{$achievedEC/$maxEC*100}} +'%');
+            $('#bar').text({{$achievedEC}} +" EC")
             @endif
         })
     </script>
