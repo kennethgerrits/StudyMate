@@ -30,11 +30,10 @@
 
                                 <div class="col-md-6">
                                     <select class="form-control" name="overseer">
-                                        <option>Select a overseer</option>
                                         @foreach ($teachers as $teacher)
-                                                <option value="{{ $teacher->id}}">
-                                                    {{ $teacher->name }}
-                                                </option>
+                                            <option value="{{ $teacher->id}}">
+                                                {{ $teacher->name }}
+                                            </option>
                                         @endforeach
                                     </select>
 
@@ -50,8 +49,7 @@
                                 <label for="taught_by" class="col-md-4 col-form-label text-md-right">{{ __('Taught by') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-control" name="overseer">
-                                        <option>Select a teacher</option>
+                                    <select class="form-control" name="taught_by">
                                         @foreach ($teachers as $teacher)
                                             <option value="{{ $teacher->id}}">
                                                 {{ $teacher->name }}
@@ -60,6 +58,85 @@
                                     </select>
 
                                     @error('taught_by')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="block_id" class="col-md-4 col-form-label text-md-right">{{ __('Block') }}</label>
+
+                                <div class="col-md-6">
+                                    <select class="form-control" name="block_id">
+                                        @foreach ($blocks as $block)
+                                            <option value="{{ $block->id}}">
+                                                {{ $block->id }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('block_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="period_id" class="col-md-4 col-form-label text-md-right">{{ __('Period') }}</label>
+
+                                <div class="col-md-6">
+                                    <select class="form-control" name="period_id">
+                                        @foreach ($periods as $period)
+                                            <option value="{{ $period->id}}">
+                                                {{ $period->id }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('period_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="study_points" class="col-md-4 col-form-label text-md-right">{{ __('Study points') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="study_points" type="number" class="form-control @error('study_points') is-invalid @enderror" name="study_points" value="{{ old('study_points') }}" required autocomplete="study_points" autofocus>
+
+                                    @error('study_points')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ "$message" }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="is_finished" class="col-md-4 col-form-label text-md-right">{{ __('Is finished') }}</label>
+
+                                <div class="col-md-6">
+                                    <select class="form-control" name="is_finished">
+                                        @for($i = 0; $i<2; $i++)
+                                            <option value="{{ $i }}">
+                                                @if($i == 0)
+                                                    False
+                                                @endif
+                                                @if($i == 1)
+                                                    True
+                                                @endif
+                                            </option>
+                                        @endfor
+                                    </select>
+
+                                    @error('is_finished')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
