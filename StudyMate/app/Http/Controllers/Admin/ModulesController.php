@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Module;
+use App\User;
 use Illuminate\Http\Request;
 
 class ModulesController extends Controller
@@ -26,7 +27,16 @@ class ModulesController extends Controller
      */
     public function create()
     {
-        return view('admin.modules.create');
+        $users = User::all();
+        $teachers = collect();
+        foreach ($users as $user){
+            if($user->hasRole('teacher')){
+                $teachers->push($user);
+            }
+        }
+        return view('admin.modules.create',[
+            'teachers' => $teachers
+        ]);
     }
 
     /**
@@ -57,8 +67,16 @@ class ModulesController extends Controller
      */
     public function edit(Module $module)
     {
+        $users = User::all();
+              $teachers = collect();
+              foreach ($users as $user){
+                  if($user->hasRole('teacher')){
+                      $teachers->push($user);
+                  }
+              }
         return view('admin.modules.edit')->with([
-            'module' => $module
+            'module' => $module,
+            'teachers' => $teachers
         ]);
     }
 
@@ -71,7 +89,7 @@ class ModulesController extends Controller
      */
     public function update(Request $request, Module $module)
     {
-        $module->users()->sync($request->modules);
+        //$module->sync($request->modules);
 
         $module->name = $request->name;
         $module->overseer = $request->overseer;

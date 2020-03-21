@@ -1,0 +1,16 @@
+.margin-bottom{
+    margin-bottom: 8em;
+}
+
+.margin-bottom-small{
+    margin-bottom: 2em;
+}
+
+hr{
+    height: 2px ;
+    margin: 0;
+    &.gray-border{
+        border: 2px solid gray;
+        margin-bottom: 2em;
+    }
+}

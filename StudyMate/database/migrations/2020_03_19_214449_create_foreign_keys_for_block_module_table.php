@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateModuleUserTable extends Migration
+class CreateForeignKeysForBlockModuleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class CreateModuleUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('module_user', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('module_id')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
+        Schema::table('modules', function (Blueprint $table) {
+            $table->foreign('block_id')->references('id')->on('blocks')->onDelete('CASCADE');
         });
     }
 
@@ -27,6 +25,6 @@ class CreateModuleUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('module_user');
+        Schema::dropIfExists('foreign_keys_for_block_module');
     }
 }

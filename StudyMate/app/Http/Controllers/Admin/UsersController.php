@@ -35,7 +35,7 @@ class UsersController extends Controller
                     }
                 }*/
 
-        return view('admin.users.index')->with('users', $users);
+        return view('admin.users.index',['users' => $users]);
     }
 
     /**
@@ -68,9 +68,6 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $user->roles()->sync($request->roles);
-        $user->modules()->sync($request->modules);
-
         $user->name = $request->name;
         $user->email = $request->email;
 
