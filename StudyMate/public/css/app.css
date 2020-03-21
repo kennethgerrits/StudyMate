@@ -10900,3 +10900,47 @@ hr.gray-border {
   margin-bottom: 2em;
 }
 
+.progress-bar.nullpercent {
+  width: 0;
+}
+
+.progress-bar.tenpercent {
+  width: 10%;
+}
+
+.progress-bar.twentypercent {
+  width: 20%;
+}
+
+.progress-bar.thirtypercent {
+  width: 30%;
+}
+
+.progress-bar.fourtypercent {
+  width: 40%;
+}
+
+.progress-bar.fiftypercent {
+  width: 50%;
+}
+
+.progress-bar.sixtypercent {
+  width: 60%;
+}
+
+.progress-bar.seventypercent {
+  width: 70%;
+}
+
+.progress-bar.eightypercent {
+  width: 80%;
+}
+
+.progress-bar.ninetypercent {
+  width: 90%;
+}
+
+.progress-bar.onehundredpercent {
+  width: 100%;
+}
+

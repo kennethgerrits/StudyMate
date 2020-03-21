@@ -14,3 +14,49 @@ hr{
         margin-bottom: 2em;
     }
 }
+
+.progress-bar{
+    &.nullpercent{
+        width:0;
+    }
+
+    &.tenpercent{
+        width:10%;
+    }
+
+    &.twentypercent{
+         width:20%;
+     }
+
+    &.thirtypercent{
+        width:30%;
+    }
+
+    &.fourtypercent{
+        width:40%;
+    }
+
+    &.fiftypercent{
+        width:50%;
+    }
+
+    &.sixtypercent{
+        width:60%;
+    }
+
+    &.seventypercent{
+        width:70%;
+    }
+
+    &.eightypercent{
+        width:80%;
+    }
+
+    &.ninetypercent{
+        width:90%;
+    }
+
+    &.onehundredpercent{
+        width:100%;
+    }
+}
