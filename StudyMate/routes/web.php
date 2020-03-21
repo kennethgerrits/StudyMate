@@ -21,6 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+Route::get('/dashboard/{block}', 'DashboardController@details')->name('dashboard_details');
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']])->middleware('can:manage-users');
