@@ -27,6 +27,7 @@
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/hamcrest/hamcrest-php" />
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/jakub-onderka/php-console-color" />
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/jakub-onderka/php-console-highlighter" />
+      <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/laravel/browser-kit-testing" />
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/laravel/framework" />
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/laravel/tinker" />
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/laravel/ui" />
@@ -77,6 +78,7 @@
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/swiftmailer/swiftmailer" />
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/symfony/console" />
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/symfony/css-selector" />
+      <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/symfony/dom-crawler" />
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/symfony/error-handler" />
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/symfony/event-dispatcher" />
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/symfony/event-dispatcher-contracts" />
