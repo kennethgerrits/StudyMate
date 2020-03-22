@@ -31,8 +31,8 @@ class ModulesController extends Controller
     {
         $users = User::all();
         $teachers = collect();
-        foreach ($users as $user){
-            if($user->hasRole('teacher')){
+        foreach ($users as $user) {
+            if ($user->hasRole('teacher')) {
                 $teachers->push($user);
             }
         }
@@ -40,7 +40,7 @@ class ModulesController extends Controller
         $blocks = Block::all();
         $periods = Period::all();
 
-        return view('admin.modules.create',[
+        return view('admin.modules.create', [
             'teachers' => $teachers,
             'blocks' => $blocks,
             'periods' => $periods
@@ -59,8 +59,8 @@ class ModulesController extends Controller
             'name' => $request['name'],
             'overseer' => $request['overseer'],
             'taught_by' => $request['taught_by'],
-            'block_id' =>$request['block_id'],
-            'period_id' =>$request['period_id'],
+            'block_id' => $request['block_id'],
+            'period_id' => $request['period_id'],
             'study_points' => $request['study_points'],
             'is_finished' => $request['is_finished'],
         ]);
@@ -79,12 +79,12 @@ class ModulesController extends Controller
     public function edit(Module $module)
     {
         $users = User::all();
-              $teachers = collect();
-              foreach ($users as $user){
-                  if($user->hasRole('teacher')){
-                      $teachers->push($user);
-                  }
-              }
+        $teachers = collect();
+        foreach ($users as $user) {
+            if ($user->hasRole('teacher')) {
+                $teachers->push($user);
+            }
+        }
 
         $blocks = Block::all();
         $periods = Period::all();
@@ -144,4 +144,5 @@ class ModulesController extends Controller
 
         return redirect()->route('admin.modules.index');
     }
+
 }

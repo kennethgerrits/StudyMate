@@ -32,7 +32,6 @@ class UserManagementTest extends TestCase
     public function seeUsersCrudTest()
     {
         $users = User::all();
-        $this->us
         $this->assertTrue($users->name->has('eyJpdiI6ImJGNi9ObHFHdkxES210dkFDbmFzSXc9PSIsInZhbHVlIjoid2tWWGtTRExQaTNSNUpPQ3pGQlNXUT09IiwibWFjIjoiMTQxN2U5NDRlODFlMTg3M2JjYTJiZGUyMzI0ZmUzZDUyM2U3ZmE1NGExODAzMGExOWJmNGUxNGE5NTIyNTNkNCJ9'));
         /*   $response = $this->get('/admin/users');
            $response->*/

@@ -29,5 +29,6 @@ Route::prefix('dashboard')->group(function(){
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']])->middleware('can:manage-users');
     Route::resource('/modules', 'ModulesController', ['except' => ['show']])->middleware('can:manage-modules');
+    Route::resource('/exams', 'ExamController', ['except' => ['create', 'edit', 'update']]);
 
 });

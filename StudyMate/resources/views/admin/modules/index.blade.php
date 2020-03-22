@@ -40,6 +40,9 @@
                                             {{method_field('DELETE')}}
                                             <button type="submit" class="btn btn-danger">Delete</button>
                                         </form>
+                                        <a href="{{route('admin.exams.show', $module->id)}}">
+                                            <button type="button" class="btn btn-info float-left">Upload</button>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
