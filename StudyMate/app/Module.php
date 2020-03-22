@@ -31,7 +31,7 @@ class Module extends Model
     }
 
     public function exams(){
-        return $this->belongsToMany('App\Exam');
+        return $this->hasMany('App\Exam', 'module_id');
     }
 
 

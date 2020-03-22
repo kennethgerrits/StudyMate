@@ -9,6 +9,10 @@ class Exam extends Model
     public $timestamps = false;
     //
 
+    protected $fillable = [
+        'description', 'deadline_date', 'appendix', 'is_finished', 'module_id', 'examtype_id'
+    ];
+
     public function type(){
         return $this->belongsTo('App\ExamType');
     }
