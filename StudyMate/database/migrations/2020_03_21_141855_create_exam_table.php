@@ -18,7 +18,7 @@ class CreateExamTable extends Migration
             $table->string('description');
             $table->date('deadline_date');
             $table->boolean('is_finished');
-            $table->binary('appendix')->nullable();
+            $table->string('appendix')->nullable();
             $table->unsignedBigInteger('module_id');
             $table->unsignedBigInteger('examtype_id');
         });

@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Exam;
 use App\ExamType;
-use App\Module;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use PhpParser\Node\Expr\AssignOp\Mod;
+use App\Module;
+use Illuminate\Http\Request;
 
 
 class ExamController extends Controller
@@ -21,49 +19,150 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
+        if ($request->examtype === 'exam') {
+            $exam = Module::where('id', '=', $request->id)
+                ->first()
+                ->exams()
+                ->where('examtype_id', '=', ExamType::EXAM)
+                ->first();
+            if ($exam != null) {
+                $exam->description = $request->description;
+                $exam->deadline_date = $request->deadline;
 
-        $request->zipfile->storeAs('exam_files', $request->zipfile->getClientOriginalName());
-        $filename =$request->zipfile->getClientOriginalName();
-        if($request->examtype == 'assessment')
-        $exam = Exam::create([
-            'description' => $request['description'],
-            'deadline_date' => $request['deadline'],
-            'appendix' => $filename,
-            'is_finished' => 0,
-            'module_id' => 1,
-            'examtype_id' => ExamType::ASSESSMENT,
-        ]);
+                if ($exam->save()) {
+                    $request->session()->flash('success', $exam->description.' has been updated.');
+                } else {
+                    $request->session()->flash('error', $exam->description.' could not be updated.');
+                }
+            } else {
+                $exam = Exam::create([
+                    'description' => $request['description'],
+                    'deadline_date' => $request['deadline'],
+                    'is_finished' => 0,
+                    'module_id' => $request['id'],
+                    'examtype_id' => ExamType::EXAM,
+                ]);
 
-        $request->session()->flash('success', $exam->description.' has been created.');
+                $request->session()->flash('success', $exam->description.' has been created.');
+            }
+
+        }
+
+        if ($request->examtype === 'assessment') {
+            $assessment = Module::where('id', '=', $request->id)
+                ->first()
+                ->exams()
+                ->where('examtype_id', '=', ExamType::ASSESSMENT)
+                ->first();
+            if ($request->zipfile != '') {
+                $request->zipfile->storeAs('exam_files', $request->zipfile->getClientOriginalName());
+                $filename = $request->zipfile->getClientOriginalName();
+            }
+            if ($assessment != null) {
+                $assessment->description = $request->description;
+                $assessment->deadline_date = $request->deadline;
+                $assessment->appendix = $filename;
+
+                if ($assessment->save()) {
+                    $request->session()->flash('success', $assessment->description.' has been updated.');
+                } else {
+                    $request->session()->flash('error', $assessment->description.' could not be updated.');
+                }
+            } else {
+                if ($filename != null) {
+                    $exam = Exam::create([
+                        'description' => $request['description'],
+                        'deadline_date' => $request['deadline'],
+                        'appendix' => $filename,
+                        'is_finished' => 0,
+                        'module_id' => $request['id'],
+                        'examtype_id' => ExamType::ASSESSMENT,
+                    ]);
+                    $request->session()->flash('success', $exam->description.' has been created.');
+                } else {
+                    $exam = Exam::create([
+                        'description' => $request['description'],
+                        'deadline_date' => $request['deadline'],
+                        'is_finished' => 0,
+                        'module_id' => $request['id'],
+                        'examtype_id' => ExamType::ASSESSMENT,
+                    ]);
+                    $request->session()->flash('success', $exam->description.' has been created.');
+                }
+            }
+        }
+
+        if ($request->examtype === 'assignment') {
+            $assignment = Module::where('id', '=', $request->id)
+                ->first()
+                ->exams()
+                ->where('examtype_id', '=', ExamType::ASSIGNMENT)
+                ->first();
+            if ($assignment != null) {
+                $assignment->description = $request->description;
+                $assignment->deadline_date = $request->deadline;
+
+                if ($assignment->save()) {
+                    $request->session()->flash('success', $assignment->description.' has been updated.');
+                } else {
+                    $request->session()->flash('error', $assignment->description.' could not be updated.');
+                }
+            } else {
+                $exam = Exam::create([
+                    'description' => $request['description'],
+                    'deadline_date' => $request['deadline'],
+                    'is_finished' => 0,
+                    'module_id' => $request['id'],
+                    'examtype_id' => ExamType::ASSIGNMENT,
+                ]);
+
+                $request->session()->flash('success', $exam->description.' has been created.');
+            }
+
+        }
+
         return redirect()->route('admin.modules.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Module  $moduleid
+     * @param \App\Module $moduleid
      * @return \Illuminate\Http\Response
      */
     public function show($moduleid)
     {
         $module = Module::where('id', '=', $moduleid)->first();
-        $assessment = $module->exams()
+        $exam = $module
+            ->exams()
+            ->where('examtype_id', '=', ExamType::EXAM)
+            ->first();
+        $assessment = $module
+            ->exams()
             ->where('examtype_id', '=', ExamType::ASSESSMENT)
             ->first();
-        return view('admin.exams.show',[
-            'id' => $moduleid,
-            'assessment' => $assessment
+        $assignment = $module
+            ->exams()
+            ->where('examtype_id', '=', ExamType::ASSIGNMENT)
+            ->first();
+
+        return view('admin.exams.show', [
+            'moduleid' => $moduleid,
+            'assessment' => $assessment,
+            'exam' => $exam,
+            'assignment' => $assignment
         ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Exam  $exam
+     * @param \App\Exam $exam
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Exam $exam)
+    public function destroyAppendix($examid)
     {
-        //
+        dd($examid);
     }
 }
