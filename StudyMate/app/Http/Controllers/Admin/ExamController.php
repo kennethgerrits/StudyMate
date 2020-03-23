@@ -7,6 +7,7 @@ use App\ExamType;
 use App\Http\Controllers\Controller;
 use App\Module;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 
 class ExamController extends Controller
@@ -163,6 +164,18 @@ class ExamController extends Controller
      */
     public function destroyAppendix($examid)
     {
-        dd($examid);
+        $exam = Exam::where('id', '=', $examid)->first();
+        $filename = $exam->appendix;
+        $exam->appendix = null;
+        $exam->save();
+        unlink(storage_path('app\public\exam_files\\' . $filename));
+        //Storage::delete('app/public/exam_files/' . $filename);
+        return redirect()->route('admin.modules.index');
+    }
+
+    public function downloadZipfile($examid){
+        $filename = Exam::where('id', '=', $examid)->pluck('appendix')->first();
+        //dd($filename);
+        return response()->download(storage_path('app\public\exam_files\\' . $filename));
     }
 }

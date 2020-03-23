@@ -51,8 +51,9 @@
                             <br/>
                             <input type="file" name="zipfile"/>
                             <br/><br/>
-                            @if($assessment->appendix != null)
-                            <a href="{{route('admin.getDestroyAppendix', ['examid' => $assessment->id])}}" class="btn btn-danger">Delete zipfile</a>
+                            @if($assessment != null && $assessment->appendix != null)
+                                <a href="{{route('admin.getAppendix', ['exam' => $assessment->id])}}" class="btn btn-primary">Download zipfile</a>
+                                <a href="{{route('admin.getDestroyAppendix', ['exam' => $assessment->id])}}" class="btn btn-danger">Delete zipfile</a>
                             @endif
                             <input type="submit" class="btn btn-success" value="Save"/>
                         </form>
