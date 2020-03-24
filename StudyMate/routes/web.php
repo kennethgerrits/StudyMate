@@ -20,6 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::prefix('dashboard')->group(function(){
     Route::get('/', 'DashboardController@index')->name('getDashboardIndex');
     Route::get('/{block}', 'DashboardController@details')->name('getDashboardDetails');
@@ -29,8 +30,10 @@ Route::prefix('dashboard')->group(function(){
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::resource('/users', 'UsersController', ['except' => ['show', 'create', 'store']])->middleware('can:manage-users');
     Route::resource('/modules', 'ModulesController', ['except' => ['show']])->middleware('can:manage-modules');
-    Route::resource('/exams', 'ExamController', ['except' => ['create', 'edit', 'update']]);
-    Route::get('/destroyappendix/{exam}', 'ExamController@destroyAppendix')->name('getDestroyAppendix');
-    Route::get('/download/{exam}', 'ExamController@downloadZipfile')->name('getAppendix');
-
+    Route::resource('/exams', 'ExamController', ['except' => ['create', 'edit', 'update']])->middleware('can:manage-modules');
+    Route::get('/destroyappendix/{exam}', 'ExamController@destroyAppendix')->name('getDestroyAppendix')->middleware('can:manage-modules');
+    Route::get('/download/{exam}', 'ExamController@downloadZipfile')->name('getAppendix')->middleware('can:manage-modules');
 });
+
+Route::get('/deadlines', 'DeadlineController@index')->name('getDeadlineManagerIndex')->middleware('can:manage-deadlines');
+

@@ -14,7 +14,7 @@ class Exam extends Model
     ];
 
     public function type(){
-        return $this->belongsTo('App\ExamType');
+        return $this->belongsTo('App\ExamType', 'examtype_id');
     }
 
     public function module(){

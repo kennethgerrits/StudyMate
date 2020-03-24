@@ -20,7 +20,6 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
         if ($request->examtype === 'exam') {
             $exam = Module::where('id', '=', $request->id)
                 ->first()
@@ -47,7 +46,6 @@ class ExamController extends Controller
 
                 $request->session()->flash('success', $exam->description.' has been created.');
             }
-
         }
 
         if ($request->examtype === 'assessment') {
@@ -120,9 +118,7 @@ class ExamController extends Controller
 
                 $request->session()->flash('success', $exam->description.' has been created.');
             }
-
         }
-
         return redirect()->route('admin.modules.index');
     }
 
@@ -168,14 +164,14 @@ class ExamController extends Controller
         $filename = $exam->appendix;
         $exam->appendix = null;
         $exam->save();
-        unlink(storage_path('app\public\exam_files\\' . $filename));
-        //Storage::delete('app/public/exam_files/' . $filename);
+        unlink(storage_path('app\public\exam_files\\'.$filename));
         return redirect()->route('admin.modules.index');
     }
 
-    public function downloadZipfile($examid){
+    public function downloadZipfile($examid)
+    {
         $filename = Exam::where('id', '=', $examid)->pluck('appendix')->first();
         //dd($filename);
-        return response()->download(storage_path('app\public\exam_files\\' . $filename));
+        return response()->download(storage_path('app\public\exam_files\\'.$filename));
     }
 }
