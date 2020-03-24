@@ -21,6 +21,7 @@ class CreateExamTable extends Migration
             $table->string('appendix')->nullable();
             $table->unsignedBigInteger('module_id');
             $table->unsignedBigInteger('examtype_id');
+            $table->unsignedBigInteger('tag_id')->nullable();
         });
     }
 

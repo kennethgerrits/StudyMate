@@ -36,4 +36,5 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
 });
 
 Route::get('/deadlines', 'DeadlineController@index')->name('getDeadlineManagerIndex')->middleware('can:manage-deadlines');
+Route::post('/deadlines/post', 'DeadlineController@saveChanges')->name('postDeadlineManagerChanges')->middleware('can:manage-deadlines');
 

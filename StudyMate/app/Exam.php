@@ -10,7 +10,7 @@ class Exam extends Model
     //
 
     protected $fillable = [
-        'description', 'deadline_date', 'appendix', 'is_finished', 'module_id', 'examtype_id'
+        'description', 'deadline_date', 'appendix', 'is_finished', 'module_id', 'examtype_id', 'tag_id'
     ];
 
     public function type(){
@@ -19,5 +19,9 @@ class Exam extends Model
 
     public function module(){
         return $this->belongsTo('App\Module');
+    }
+
+    public function tag(){
+        return $this->belongsTo('App\Tag', 'tag_id');
     }
 }

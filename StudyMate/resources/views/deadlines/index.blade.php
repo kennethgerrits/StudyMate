@@ -7,37 +7,58 @@
                 <div class="card">
                     <div class="card-header">Users</div>
                     <div class="card-body">
-                        <table class="table">
+                        <form action="{{route('postDeadlineManagerChanges')}}" method="POST">
+                        <table class="table border border-bottom">
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Type</th>
                                 <th scope="col">Deadline</th>
-                                <th scope="col">Actions</th>
+                                <th scope="col">Tag</th>
+                                <th scope="col">Finished</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($exams as $exam)
-                                <tr>
-                                    <th scope="row">{{$exam->id}}</th>
-                                    <td>{{$exam->description}}</td>
-                                    <td>{{$exam->type()->first()->type}}</td>
-                                    <td>{{$exam->deadline_date}}</td>
-                                    <td>
-                                        <a href="{{route('admin.users.edit', $user->id)}}">
-                                            <button type="button" class="btn btn-primary float-left">Edit</button>
-                                        </a>
-                                        <form action="{{route('admin.users.destroy', $user)}}" method="POST" class="float-left">
-                                            @csrf
-                                            {{method_field('DELETE')}}
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
+
+                                @csrf
+                                <input type="hidden" name="exams" value="{{$exams}}"/>
+                                @foreach($exams as $exam)
+                                    <tr>
+                                        <th scope="row">{{$exam->id}}</th>
+                                        <td>{{$exam->description}}</td>
+                                        <td>{{$exam->type()->first()->type}}</td>
+                                        <td>{{$exam->deadline_date}}</td>
+                                        <td>
+                                            <select class="form-control" name="tags[]">
+                                                @if($exam->tag()->first() != null)
+                                                    {{$tagarray = collect([$exam->id, $exam->tag_id])}}
+                                                    {{$tagarray->implode('[', ',', ']')}}
+                                                    <option value="{{$tagarray}}">{{$exam->tag()->first()->tag}}</option>
+                                                @endif
+                                                @foreach ($tags as $tag)
+                                                    @if($tag->id != $exam->tag_id)
+                                                        {{$tagarray = collect([$exam->id, $tag->id])}}
+                                                        {{$tagarray->implode('[', ',', ']')}}
+                                                        <option value="{{$tagarray}}">
+                                                            {{ $tag->tag }}
+                                                        </option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <div class="form-check">
+                                                <input type="checkbox" class="btn btn-danger" name="finished[]" value="{{$exam->id}}"
+                                                       @if($exam->is_finished) checked @endif/>
+                                            </div>
+                                        </td>
+                                    </tr>
                             @endforeach
                             </tbody>
                         </table>
+                        <button type="submit" class="btn btn-primary float-right mt-3">Save changes</button>
+                        </form>
                     </div>
                 </div>
             </div>
