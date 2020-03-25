@@ -16,6 +16,10 @@ class CreateForeignKeysForExamExamtypeModulesTable extends Migration
         Schema::table('exams', function (Blueprint $table) {
             $table->foreign('module_id')->references('id')->on('modules')->onDelete('CASCADE');
             $table->foreign('examtype_id')->references('id')->on('exam_types')->onDelete('CASCADE');
+        });
+
+        Schema::table('exam_tags', function (Blueprint $table){
+            $table->foreign('exam_id')->references('id')->on('exams')->onDelete('CASCADE');
             $table->foreign('tag_id')->references('id')->on('tags')->onDelete('CASCADE');
         });
     }
