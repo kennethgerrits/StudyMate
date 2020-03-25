@@ -35,6 +35,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::get('/download/{exam}', 'ExamController@downloadZipfile')->name('getAppendix')->middleware('can:manage-modules');
 });
 
-Route::get('/deadlines', 'DeadlineController@index')->name('getDeadlineManagerIndex')->middleware('can:manage-deadlines');
+Route::get('/deadlines/{column?}/{order?}/{table?}', 'DeadlineController@index')->name('getDeadlineManagerIndex')->middleware('can:manage-deadlines');
 Route::post('/deadlines/post', 'DeadlineController@saveChanges')->name('postDeadlineManagerChanges')->middleware('can:manage-deadlines');
 

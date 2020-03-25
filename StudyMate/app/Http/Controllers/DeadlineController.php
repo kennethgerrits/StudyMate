@@ -10,21 +10,55 @@ use Illuminate\Http\Request;
 
 class DeadlineController extends Controller
 {
-    public function index()
+    public function index($column = null, $order = null, $table = null)
     {
-        $exams = Exam::where('is_finished', '=', false)->where('deadline_date', '>=', Carbon::now()->toDate())->get();
+//        if($table != null){
+//            dd($table, $column);
+//        }
+        $lastorder = 'asc';
+        if($table != null){
+            if($order == 'asc'){
+                $exams = Exam::with($table)
+                    ->where('is_finished', '=', false)
+                    ->where('deadline_date', '>=', Carbon::now()->toDate())->get()
+                    ->sortByDesc($table.'.'.$column);
+                $lastorder = 'desc';
+            }else{
+                $exams = Exam::with($table)
+                    ->where('is_finished', '=', false)
+                    ->where('deadline_date', '>=', Carbon::now()->toDate())->get()
+                    ->sortBy($table.'.'.$column);
+            }
+        }elseif($table == null && $column != null){
+            $exams = Exam::where('is_finished', '=', false)->where('deadline_date', '>=', Carbon::now()->toDate())->orderBy($column, $order)->get();
+            if($order == 'asc'){
+                $lastorder = 'desc';
+            }else{
+                $lastorder = 'asc';
+            }
+        }
+        else{
+            $exams = Exam::where('is_finished', '=', false)->where('deadline_date', '>=', Carbon::now()->toDate())->get();
+        }
         $tags = Tag::all();
         return view('deadlines.index',[
             'exams' => $exams,
-            'tags' => $tags
+            'tags' => $tags,
+            'order' => $lastorder
         ]);
     }
 
     public function indexSort(Request $request){
+        dd($request);
+        $tags = Tag::all();
         $sortTable = $request->get('table') ?? 'events';
         $sortColumn = $request->get('column') ?? 'start_date';
         $sortOrder = $request->get('order') ?? 'desc';
-        $laravel_query->orderBy($sortTable.'.'.$sortColumn, $sortOrder);
+        $exams = Exam::where('is_finished', '=', false)->where('deadline_date', '>=', Carbon::now()->toDate())->orderBy($sortTable.'.'.$sortColumn, $sortOrder);
+        return view('deadlines.index',[
+            'exams' => $exams,
+            'tags' => $tags
+        ]);
     }
 
     public function saveChanges(Request $request){

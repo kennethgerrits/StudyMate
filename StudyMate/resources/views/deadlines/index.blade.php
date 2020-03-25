@@ -13,9 +13,12 @@
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
+
+                                <th scope="col" onclick="window.location.href = '{{route('getDeadlineManagerIndex', ['column' => 'name', 'order' => $order, 'table' => 'module'])}}'">Module</th>
+                                <th scope="col" onclick="window.location.href = '{{route('getDeadlineManagerIndex', ['column' => 'name', 'order' => $order, 'table' => 'module.teacher'])}}'">Teacher</th>
                                 <th scope="col">Description</th>
-                                <th scope="col" onclick="">Type</th>
-                                <th scope="col">Deadline</th>
+                                <th scope="col" onclick="window.location.href = '{{route('getDeadlineManagerIndex', ['column' => 'type', 'order' => $order, 'table' => 'type'])}}'">Type</th>
+                                <th scope="col" onclick="window.location.href = '{{route('getDeadlineManagerIndex', ['column' => 'deadline_date', 'order' => $order])}}'">Deadline</th>
                                 <th scope="col">Tag</th>
                                 <th scope="col">Finished</th>
                             </tr>
@@ -27,6 +30,8 @@
                                 @foreach($exams as $exam)
                                     <tr>
                                         <th scope="row">{{$exam->id}}</th>
+                                        <td>{{$exam->module()->first()->name}}</td>
+                                        <td>{{$exam->module()->first()->teacher()->first()->name}}</td>
                                         <td>{{$exam->description}}</td>
                                         <td>{{$exam->type()->first()->type}}</td>
                                         <td>{{$exam->deadline_date}}</td>
@@ -66,3 +71,4 @@
         </div>
     </div>
 @endsection
+
