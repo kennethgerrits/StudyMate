@@ -14,7 +14,12 @@ class ExamsTableSeeder extends Seeder
      */
     public function run()
     {
-        Exam::create([
+
+        DB::table('exams')->delete();
+        DB::table('exam_tags')->delete();
+
+
+        $e1 = Exam::create([
             'description' => 'PROG6 Assessment',
             'deadline_date' => Carbon::now()->addDays(6)->toDate(),
             'is_finished' => true,
@@ -22,7 +27,7 @@ class ExamsTableSeeder extends Seeder
             'examtype_id' => ExamType::ASSESSMENT
         ]);
 
-        Exam::create([
+        $e2 = Exam::create([
             'description' => 'SWEN5 Exam, cheat-sheet allowed',
             'deadline_date' => Carbon::now()->addDays(14)->toDate(),
             'is_finished' => false,
@@ -30,7 +35,7 @@ class ExamsTableSeeder extends Seeder
             'examtype_id' => ExamType::EXAM
         ]);
 
-        Exam::create([
+        $e3 = Exam::create([
             'description' => 'SWEN5 Assignments',
             'deadline_date' => Carbon::now()->addDays(2)->toDate(),
             'is_finished' => false,
@@ -38,12 +43,15 @@ class ExamsTableSeeder extends Seeder
             'examtype_id' => ExamType::ASSIGNMENT
         ]);
 
-        Exam::create([
+        $e4 = Exam::create([
             'description' => 'DB1 Exam, be prepared',
             'deadline_date' => Carbon::now()->addDays(1)->toDate(),
             'is_finished' => true,
             'module_id' => 1,
             'examtype_id' => ExamType::EXAM
         ]);
+
+
+
     }
 }

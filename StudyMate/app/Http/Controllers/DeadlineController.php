@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exam;
+use App\ExamTag;
 use App\ExamType;
 use App\Tag;
 use Carbon\Carbon;
@@ -12,9 +13,6 @@ class DeadlineController extends Controller
 {
     public function index($column = null, $order = null, $table = null)
     {
-//        if($table != null){
-//            dd($table, $column);
-//        }
         $lastorder = 'asc';
         if($table != null){
             if($order == 'asc'){
@@ -48,27 +46,18 @@ class DeadlineController extends Controller
         ]);
     }
 
-    public function indexSort(Request $request){
-        dd($request);
-        $tags = Tag::all();
-        $sortTable = $request->get('table') ?? 'events';
-        $sortColumn = $request->get('column') ?? 'start_date';
-        $sortOrder = $request->get('order') ?? 'desc';
-        $exams = Exam::where('is_finished', '=', false)->where('deadline_date', '>=', Carbon::now()->toDate())->orderBy($sortTable.'.'.$sortColumn, $sortOrder);
-        return view('deadlines.index',[
-            'exams' => $exams,
-            'tags' => $tags
-        ]);
-    }
-
     public function saveChanges(Request $request){
         $delimiters = collect(['[', ']']);
         foreach ($request->tags as $tag){
+            if($tag == null){
+                continue;
+            }
             $tag = str_replace(['[', ']'], '', $tag);
             $tag = explode(',', $tag);
-            $exam = Exam::where('id', '=', $tag[0])->first();
-            $exam->tag_id = $tag[1];
-            $exam->save();
+            ExamTag::create([
+                'exam_id' => $tag[0],
+                'tag_id' => $tag[1]
+            ]);
         }
         if($request->finished != null){
             foreach($request->finished as $finishedid){
