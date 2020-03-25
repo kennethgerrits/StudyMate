@@ -37054,6 +37054,16 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+function filterTable(table, column) {
+  var url = "{{ route('getDeadlineManagerIndex') }}?table=' + table + '&column=' + column'";
+
+  if (window.location.href === url + '&order=asc' || window.location.href === url) {
+    window.location = url + '&order=desc';
+  } else {
+    window.location = url + '&order=asc';
+  }
+}
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

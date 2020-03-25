@@ -7,13 +7,14 @@
                 <div class="card">
                     <div class="card-header">Users</div>
                     <div class="card-body">
+
                         <form action="{{route('postDeadlineManagerChanges')}}" method="POST">
                         <table class="table border border-bottom">
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Description</th>
-                                <th scope="col">Type</th>
+                                <th scope="col" onclick="">Type</th>
                                 <th scope="col">Deadline</th>
                                 <th scope="col">Tag</th>
                                 <th scope="col">Finished</th>

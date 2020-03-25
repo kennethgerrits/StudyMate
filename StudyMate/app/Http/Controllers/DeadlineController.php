@@ -20,6 +20,13 @@ class DeadlineController extends Controller
         ]);
     }
 
+    public function indexSort(Request $request){
+        $sortTable = $request->get('table') ?? 'events';
+        $sortColumn = $request->get('column') ?? 'start_date';
+        $sortOrder = $request->get('order') ?? 'desc';
+        $laravel_query->orderBy($sortTable.'.'.$sortColumn, $sortOrder);
+    }
+
     public function saveChanges(Request $request){
         $delimiters = collect(['[', ']']);
         foreach ($request->tags as $tag){
