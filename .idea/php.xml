@@ -99,6 +99,8 @@
       <path value="$PROJECT_DIR$/StudyMate/vendor/laravel/ui" />
       <path value="$PROJECT_DIR$/StudyMate/vendor/symfony/dom-crawler" />
       <path value="$PROJECT_DIR$/StudyMate/vendor/laravel/browser-kit-testing" />
+      <path value="$PROJECT_DIR$/StudyMate/vendor/laravel/dusk" />
+      <path value="$PROJECT_DIR$/StudyMate/vendor/php-webdriver/webdriver" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

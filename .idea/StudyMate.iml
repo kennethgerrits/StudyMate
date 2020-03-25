@@ -28,6 +28,7 @@
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/jakub-onderka/php-console-color" />
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/jakub-onderka/php-console-highlighter" />
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/laravel/browser-kit-testing" />
+      <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/laravel/dusk" />
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/laravel/framework" />
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/laravel/tinker" />
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/laravel/ui" />
@@ -43,6 +44,7 @@
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/paragonie/random_compat" />
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/phar-io/manifest" />
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/phar-io/version" />
+      <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/php-webdriver/webdriver" />
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/phpdocumentor/reflection-common" />
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/phpdocumentor/reflection-docblock" />
       <excludeFolder url="file://$MODULE_DIR$/StudyMate/vendor/phpdocumentor/type-resolver" />
