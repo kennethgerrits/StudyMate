@@ -1,62 +1,63 @@
-.margin-bottom{
+.margin-bottom {
     margin-bottom: 8em;
 }
 
-.margin-bottom-small{
+.margin-bottom-small {
     margin-bottom: 2em;
 }
 
-hr{
-    height: 2px ;
+hr {
+    height: 2px;
     margin: 0;
-    &.gray-border{
+
+    &.gray-border {
         border: 2px solid gray;
         margin-bottom: 2em;
     }
 }
 
-.progress-bar{
-    &.nullpercent{
-        width:0;
+.progress-bar {
+    &.nullpercent {
+        width: 0;
     }
 
-    &.tenpercent{
-        width:10%;
+    &.tenpercent {
+        width: 10%;
     }
 
-    &.twentypercent{
-         width:20%;
-     }
-
-    &.thirtypercent{
-        width:30%;
+    &.twentypercent {
+        width: 20%;
     }
 
-    &.fourtypercent{
-        width:40%;
+    &.thirtypercent {
+        width: 30%;
     }
 
-    &.fiftypercent{
-        width:50%;
+    &.fourtypercent {
+        width: 40%;
     }
 
-    &.sixtypercent{
-        width:60%;
+    &.fiftypercent {
+        width: 50%;
     }
 
-    &.seventypercent{
-        width:70%;
+    &.sixtypercent {
+        width: 60%;
     }
 
-    &.eightypercent{
-        width:80%;
+    &.seventypercent {
+        width: 70%;
     }
 
-    &.ninetypercent{
-        width:90%;
+    &.eightypercent {
+        width: 80%;
     }
 
-    &.onehundredpercent{
-        width:100%;
+    &.ninetypercent {
+        width: 90%;
+    }
+
+    &.onehundredpercent {
+        width: 100%;
     }
 }

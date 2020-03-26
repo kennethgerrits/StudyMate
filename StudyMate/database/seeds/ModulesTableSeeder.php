@@ -15,10 +15,9 @@ class ModulesTableSeeder extends Seeder
     {
         DB::table('modules')->delete();
 
-
         Module::create([
             'name' => 'DB1',
-            'overseer' =>2,
+            'overseer' => 2,
             'taught_by' => 3,
             'followed_by' => 4,
             'block_id' => 2,

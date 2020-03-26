@@ -13,15 +13,18 @@ class Exam extends Model
         'description', 'deadline_date', 'appendix', 'is_finished', 'module_id', 'examtype_id', 'tag_id'
     ];
 
-    public function type(){
+    public function type()
+    {
         return $this->belongsTo('App\ExamType', 'examtype_id');
     }
 
-    public function module(){
+    public function module()
+    {
         return $this->belongsTo('App\Module');
     }
 
-    public function tags(){
+    public function tags()
+    {
         return $this->belongsToMany('App\Tag', 'exam_tags');
     }
 

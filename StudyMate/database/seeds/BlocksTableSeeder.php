@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Block;
+
 class BlocksTableSeeder extends Seeder
 {
     /**
@@ -13,9 +14,9 @@ class BlocksTableSeeder extends Seeder
     {
         DB::table('blocks')->delete();
 
-        for($i = 0; $i<12; $i++){
-        Block::create();
-    }
+        for ($i = 0; $i < 12; $i++) {
+            Block::create();
+        }
 
     }
 }

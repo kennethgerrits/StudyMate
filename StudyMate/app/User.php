@@ -34,7 +34,8 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Role');
     }
 
-    public function roleUser(){
+    public function roleUser()
+    {
         return $this->hasMany('App\RoleUser');
     }
 
@@ -59,7 +60,8 @@ class User extends Authenticatable
         return $this->hasMany('App\Module', 'followed_by', 'id');
     }
 
-    public function teacherModules(){
+    public function teacherModules()
+    {
         return $this->hasMany('App\Module', 'taught_by', 'id');
     }
 
@@ -84,7 +86,8 @@ class User extends Authenticatable
         return Crypt::decryptString($value);
     }
 
-    public function getMaxEcAttribute(){
+    public function getMaxEcAttribute()
+    {
         $maxEC = 0;
         foreach ($this->modules()->get() as $module) {
             $maxEC += $module->study_points;
@@ -93,7 +96,8 @@ class User extends Authenticatable
         return $maxEC;
     }
 
-    public function getAchievedEcAttribute(){
+    public function getAchievedEcAttribute()
+    {
         $achievedEC = 0;
         foreach ($this->modules()->get() as $module) {
             if ($module->is_finished) {
@@ -103,7 +107,9 @@ class User extends Authenticatable
 
         return $achievedEC;
     }
-    public function getProgressPercentageAttribute(){
+
+    public function getProgressPercentageAttribute()
+    {
         $barwidth = '';
         if ($this->getMaxEcAttribute() > 0) {
             $percentage = round(($this->getAchievedEcAttribute() / $this->getMaxEcAttribute() * 100), -1);

@@ -8,7 +8,6 @@ class Role extends Model
 {
     public $timestamps = false;
 
-
     protected $fillable = [
         'name'
     ];
@@ -16,7 +15,9 @@ class Role extends Model
     const ADMIN = 1;
     const TEACHER = 2;
     const GUEST = 3;
-    public function users(){
+
+    public function users()
+    {
         return $this->belongsToMany('App\User');
     }
 }

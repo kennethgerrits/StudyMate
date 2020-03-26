@@ -14,42 +14,42 @@ class DeadlineController extends Controller
     public function index($column = null, $order = null, $table = null)
     {
         $lastorder = 'asc';
-        if($table != null){
-            if($order == 'asc'){
+        if ($table != null) {
+            if ($order == 'asc') {
                 $exams = Exam::with($table)
                     ->where('is_finished', '=', false)
                     ->where('deadline_date', '>=', Carbon::now()->toDate())->get()
                     ->sortByDesc($table.'.'.$column);
                 $lastorder = 'desc';
-            }else{
+            } else {
                 $exams = Exam::with($table)
                     ->where('is_finished', '=', false)
                     ->where('deadline_date', '>=', Carbon::now()->toDate())->get()
                     ->sortBy($table.'.'.$column);
             }
-        }elseif($table == null && $column != null){
+        } elseif ($table == null && $column != null) {
             $exams = Exam::where('is_finished', '=', false)->where('deadline_date', '>=', Carbon::now()->toDate())->orderBy($column, $order)->get();
-            if($order == 'asc'){
+            if ($order == 'asc') {
                 $lastorder = 'desc';
-            }else{
+            } else {
                 $lastorder = 'asc';
             }
-        }
-        else{
+        } else {
             $exams = Exam::where('is_finished', '=', false)->where('deadline_date', '>=', Carbon::now()->toDate())->get();
         }
         $tags = Tag::all();
-        return view('deadlines.index',[
+        return view('deadlines.index', [
             'exams' => $exams,
             'tags' => $tags,
             'order' => $lastorder
         ]);
     }
 
-    public function saveChanges(Request $request){
+    public function saveChanges(Request $request)
+    {
         $delimiters = collect(['[', ']']);
-        foreach ($request->tags as $tag){
-            if($tag == null){
+        foreach ($request->tags as $tag) {
+            if ($tag == null) {
                 continue;
             }
             $tag = str_replace(['[', ']'], '', $tag);
@@ -59,8 +59,8 @@ class DeadlineController extends Controller
                 'tag_id' => $tag[1]
             ]);
         }
-        if($request->finished != null){
-            foreach($request->finished as $finishedid){
+        if ($request->finished != null) {
+            foreach ($request->finished as $finishedid) {
                 $target = Exam::where('id', '=', $finishedid)->first();
                 $target->is_finished = true;
                 $target->save();

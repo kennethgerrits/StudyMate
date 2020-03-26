@@ -14,10 +14,8 @@ class ExamsTableSeeder extends Seeder
      */
     public function run()
     {
-
         DB::table('exams')->delete();
         DB::table('exam_tags')->delete();
-
 
         $e1 = Exam::create([
             'description' => 'PROG6 Assessment',
@@ -50,8 +48,5 @@ class ExamsTableSeeder extends Seeder
             'module_id' => 1,
             'examtype_id' => ExamType::EXAM
         ]);
-
-
-
     }
 }

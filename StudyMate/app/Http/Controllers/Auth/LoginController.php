@@ -54,9 +54,10 @@ class LoginController extends Controller
         return $this->redirectTo;
     }
 
-    public function attemptLogin(Request $request) {
+    public function attemptLogin(Request $request)
+    {
         $users = User::all();
-        $isUserValidated=false;
+        $isUserValidated = false;
         $field = $request->email;
 
         //decrypts every user email one by one, then checks if it matches with the login value.
@@ -64,8 +65,8 @@ class LoginController extends Controller
             try { // required if the field is not encrypted
                 // login using username or email
                 if (($field == $user->email) && \Hash::check($request->password, $user->password)) {
-                    $isUserValidated=true;
-                    $this->guard()->login($user,false);
+                    $isUserValidated = true;
+                    $this->guard()->login($user, false);
                     break; // Exit from the foreach loop
                 }
             } catch (DecryptException $e) {

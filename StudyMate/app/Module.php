@@ -23,14 +23,18 @@ class Module extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function overseer(){
+    public function overseer()
+    {
         return $this->belongsTo('App\User', 'overseer');
     }
-    public function teacher(){
+
+    public function teacher()
+    {
         return $this->belongsTo('App\User', 'taught_by');
     }
 
-    public function exams(){
+    public function exams()
+    {
         return $this->hasMany('App\Exam', 'module_id');
     }
 

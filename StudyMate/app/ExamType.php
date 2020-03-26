@@ -10,8 +10,10 @@ class ExamType extends Model
 
     const EXAM = 1;
     const ASSESSMENT = 2;
-    const ASSIGNMENT = 3 ;
-    public function exams(){
+    const ASSIGNMENT = 3;
+
+    public function exams()
+    {
         return $this->belongsToMany('App\Exam');
     }
 }

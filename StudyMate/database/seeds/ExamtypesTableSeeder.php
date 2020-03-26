@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\ExamType;
+
 class ExamtypesTableSeeder extends Seeder
 {
     /**
