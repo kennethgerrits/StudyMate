@@ -17,6 +17,10 @@ class CreateExamTagsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('exam_id');
             $table->unsignedBigInteger('tag_id');
+
+            $table->foreign('exam_id')->references('id')->on('exams')->onDelete('CASCADE');
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('CASCADE');
+
         });
     }
 
