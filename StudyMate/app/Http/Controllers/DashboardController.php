@@ -16,8 +16,6 @@ class DashboardController extends Controller
         })->first();
         $modules = Module::all();
 
-
-
         return view('dashboard.index', [
             'guest' => $guest,
             'maxEC' => $guest->max_ec,
