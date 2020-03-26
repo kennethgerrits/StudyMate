@@ -32,17 +32,21 @@
                                     <td>{{$module->overseer()->first()->name}}</td>
                                     <td>{{$module->teacher()->first()->name}}</td>
                                     <td>
-                                        <a href="{{route('admin.modules.edit', $module->id)}}">
-                                            <button type="button" class="btn btn-primary float-left">Edit</button>
-                                        </a>
-                                        <form action="{{route('admin.modules.destroy', $module)}}" method="POST" class="float-left">
-                                            @csrf
-                                            {{method_field('DELETE')}}
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
-                                        <a href="{{route('admin.exams.show', $module->id)}}">
-                                            <button type="button" class="btn btn-info float-left">Upload</button>
-                                        </a>
+                                        <div class="row">
+                                            <a href="{{route('admin.modules.edit', $module->id)}}">
+                                                <button type="button" class="btn btn-primary btnmargin">Edit</button>
+                                            </a>
+
+                                            <a href="{{route('admin.exams.show', $module->id)}}">
+                                                <button type="button" class="btn btn-info btnmargin">Exam</button>
+                                            </a>
+
+                                            <form action="{{route('admin.modules.destroy', $module)}}" method="POST">
+                                                @csrf
+                                                {{method_field('DELETE')}}
+                                                <button type="submit" class="btn btn-danger btnmargin">Delete</button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

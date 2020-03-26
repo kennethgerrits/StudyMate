@@ -29,14 +29,17 @@
                                     <td>{{implode(', ', $user->teacherModules()->get()->pluck('name')->toArray())}}</td>
                                     <td>{{implode(', ', $user->modules()->get()->pluck('name')->toArray())}}</td>
                                     <td>
-                                        <a href="{{route('admin.users.edit', $user->id)}}">
-                                            <button dusk="editUserBtn" type="button" class="btn btn-primary float-left">Edit</button>
-                                        </a>
-                                        <form dusk="deleteUserBtn" action="{{route('admin.users.destroy', $user)}}" method="POST" class="float-left">
-                                            @csrf
-                                            {{method_field('DELETE')}}
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
+                                        <div class="row min-double-btn-col-width">
+                                            <a href="{{route('admin.users.edit', $user->id)}}">
+                                                <button dusk="editUserBtn" type="button" class="btn btn-primary btnmargin">Edit</button>
+                                            </a>
+                                            <form dusk="deleteUserBtn" action="{{route('admin.users.destroy', $user)}}" method="POST">
+                                                @csrf
+                                                {{method_field('DELETE')}}
+                                                <button type="submit" class="btn btn-danger btnmargin">Delete</button>
+                                            </form>
+                                        </div>
+
                                     </td>
                                 </tr>
                             @endforeach

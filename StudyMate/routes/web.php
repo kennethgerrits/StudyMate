@@ -19,8 +19,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::prefix('dashboard')->group(function(){
     Route::get('/', 'DashboardController@index')->name('getDashboardIndex');
     Route::get('/{block}', 'DashboardController@details')->name('getDashboardDetails');
