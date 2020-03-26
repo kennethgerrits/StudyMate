@@ -25,7 +25,7 @@ class Exam extends Model
 
     public function tags()
     {
-        return $this->belongsToMany('App\Tag', 'exam_tags');
+        return $this->belongsToMany('App\Tag');
     }
 
 }

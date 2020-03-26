@@ -21,7 +21,6 @@ class CreateExamTable extends Migration
             $table->string('appendix')->nullable();
             $table->unsignedBigInteger('module_id');
             $table->unsignedBigInteger('examtype_id');
-            $table->unsignedBigInteger('tag_id')->nullable();
 
             $table->foreign('module_id')->references('id')->on('modules')->onDelete('CASCADE');
             $table->foreign('examtype_id')->references('id')->on('exam_types')->onDelete('CASCADE');
