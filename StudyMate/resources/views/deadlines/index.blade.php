@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Users</div>
+                    <div class="card-header">Deadline overview</div>
                     <div class="card-body">
 
                         <form action="{{route('postDeadlineManagerChanges')}}" method="POST">
@@ -13,7 +13,6 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
-
                                     <th scope="col" onclick="window.location.href = '{{route('getDeadlineManagerIndex', ['column' => 'name', 'order' => $order, 'table' => 'module'])}}'">Module</th>
                                     <th scope="col" onclick="window.location.href = '{{route('getDeadlineManagerIndex', ['column' => 'name', 'order' => $order, 'table' => 'module.teacher'])}}'">Teacher</th>
                                     <th scope="col">Description</th>
@@ -36,10 +35,10 @@
                                                     {{$exam->module()->first()->name}}
                                                 </div>
                                                 @foreach($exam->tags()->get() as $tag)
-                                                <div class="badge badge-dark d-inline-block">
-                                                    {{$tag->tag}}
-                                                </div>
-                                                    @endforeach
+                                                    <div class="badge badge-dark d-inline-block">
+                                                        {{$tag->tag}}
+                                                    </div>
+                                                @endforeach
                                             </div>
                                         </td>
                                         <td>{{$exam->module()->first()->teacher()->first()->name}}</td>
