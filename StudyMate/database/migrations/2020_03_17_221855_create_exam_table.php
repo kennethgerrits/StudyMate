@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateForeignKeysForExamExamtypeModulesTable extends Migration
+class CreateExamTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,19 @@ class CreateForeignKeysForExamExamtypeModulesTable extends Migration
      */
     public function up()
     {
-        Schema::table('exams', function (Blueprint $table) {
+        Schema::create('exams', function (Blueprint $table) {
+            $table->id();
+            $table->string('description');
+            $table->date('deadline_date');
+            $table->boolean('is_finished');
+            $table->string('appendix')->nullable();
+            $table->unsignedBigInteger('module_id');
+            $table->unsignedBigInteger('examtype_id');
+            $table->unsignedBigInteger('tag_id')->nullable();
+
             $table->foreign('module_id')->references('id')->on('modules')->onDelete('CASCADE');
             $table->foreign('examtype_id')->references('id')->on('exam_types')->onDelete('CASCADE');
-        });
 
-        Schema::table('exam_tags', function (Blueprint $table){
-            $table->foreign('exam_id')->references('id')->on('exams')->onDelete('CASCADE');
-            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('CASCADE');
         });
     }
 
@@ -31,6 +36,6 @@ class CreateForeignKeysForExamExamtypeModulesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('foreign_keys_for_exam_examtype_modules');
+        Schema::dropIfExists('exams');
     }
 }

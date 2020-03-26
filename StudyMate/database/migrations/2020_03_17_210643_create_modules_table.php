@@ -23,6 +23,12 @@ class CreateModulesTable extends Migration
             $table->unsignedBigInteger('period_id');
             $table->integer('study_points');
             $table->boolean('is_finished');
+            $table->foreign('followed_by')->references('id')->on('users')->onDelete('CASCADE');
+            $table->foreign('block_id')->references('id')->on('blocks')->onDelete('CASCADE');
+            $table->foreign('period_id')->references('id')->on('periods')->onDelete('CASCADE');
+            $table->foreign('overseer')->references('id')->on('users')->onDelete('CASCADE');
+            $table->foreign('taught_by')->references('id')->on('users')->onDelete('CASCADE');
+
         });
     }
 
