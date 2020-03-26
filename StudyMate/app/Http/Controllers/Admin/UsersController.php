@@ -81,16 +81,17 @@ class UsersController extends Controller
 
             }
         });
+        if ($request->modules != null) {
+            foreach ($request->modules as $module) {
+                $target = Module::where('id', '=', $module)->first();
 
-        foreach ($request->modules as $module) {
-            $target = Module::where('id', '=', $module)->first();
-
-            if ($user->hasRole('teacher')) {
-                $target->taught_by = $user->id;
-            } else {
-                $target->followed_by = $user->id;
+                if ($user->hasRole('teacher')) {
+                    $target->taught_by = $user->id;
+                } else {
+                    $target->followed_by = $user->id;
+                }
+                $target->save();
             }
-            $target->save();
         }
 
         if ($user->save()) {
@@ -98,6 +99,7 @@ class UsersController extends Controller
         } else {
             $request->session()->flash('error', $user->name.' could not be updated.');
         }
+
 
         return redirect()->route('admin.users.index');
     }
