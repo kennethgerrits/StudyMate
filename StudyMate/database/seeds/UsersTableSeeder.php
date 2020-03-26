@@ -59,7 +59,7 @@ class UsersTableSeeder extends Seeder
 
         $admin->roles()->attach($adminRole);
         $overseer->roles()->attach($teacherRole);
-            $teacher->roles()->attach($teacherRole);
+        $teacher->roles()->attach($teacherRole);
         $guest->roles()->attach($guestRole);
         $teacher2->roles()->attach($teacherRole);
         $teacher3->roles()->attach($teacherRole);
