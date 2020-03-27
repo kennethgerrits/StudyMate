@@ -20,7 +20,6 @@ class UserManagementTest extends DuskTestCase
     {
         $adminRole = Role::create(['name' => 'admin',]);
         $teacherRole = Role::create(['name' => 'teacher',]);
-        Role::create(['name' => 'guest',]);
 
         $teacher = factory(\App\User::class)->create();
         $teacher->roles()->attach($teacherRole);
@@ -29,7 +28,7 @@ class UserManagementTest extends DuskTestCase
         $admin->roles()->attach($adminRole);
 
         $this->browse(function ($browser) {
-            $browser->visit('/login')
+            $browser
                 ->loginAs(User::find(2))
                 ->assertAuthenticated()
                 ->visit('/admin/users')
@@ -52,7 +51,6 @@ class UserManagementTest extends DuskTestCase
     {
         $adminRole = Role::create(['name' => 'admin',]);
         $teacherRole = Role::create(['name' => 'teacher',]);
-        Role::create(['name' => 'guest',]);
 
         $teacher = factory(\App\User::class)->create();
         $teacher->roles()->attach($teacherRole);
@@ -61,7 +59,7 @@ class UserManagementTest extends DuskTestCase
         $admin->roles()->attach($adminRole);
 
         $this->browse(function ($browser) {
-            $browser->visit('/login')
+            $browser
                 ->loginAs(User::find(2))
                 ->assertAuthenticated()
                 ->visit('/admin/users')
@@ -83,22 +81,18 @@ class UserManagementTest extends DuskTestCase
      */
     public function TeacherCantDeleteUserTest()
     {
-        $adminRole = Role::create(['name' => 'admin',]);
         $teacherRole = Role::create(['name' => 'teacher',]);
-        Role::create(['name' => 'guest',]);
 
         $teacher = factory(\App\User::class)->create();
         $teacher->roles()->attach($teacherRole);
 
-        $admin = factory(\App\User::class)->create();
-        $admin->roles()->attach($adminRole);
-
         $this->browse(function ($browser) {
-            $browser->visit('/login')
+            $browser
                 ->loginAs(User::find(1))
                 ->assertAuthenticated()
                 ->visit('/admin/users')
-                ->assertSee('403');
+                ->assertSee('403')
+                ->assertSee('This action is unauthorized.');
         });
     }
 }
