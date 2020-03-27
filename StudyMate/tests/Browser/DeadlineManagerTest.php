@@ -17,6 +17,8 @@ use Tests\DuskTestCase;
 
 class DeadlineManagerTest extends DuskTestCase
 {
+    use DatabaseMigrations;
+
     /**
      * Admin can delete user.
      *
@@ -24,12 +26,55 @@ class DeadlineManagerTest extends DuskTestCase
      */
     public function tbdTest()
     {
+        //Roles, User, Module, Block and Period
+        //Roles
         Role::create(['name' => 'admin',]);
-        Role::create(['name' => 'teacher',]);
-        $guestRole = Role::create(['name' => 'guest',]);
+        $teacher = Role::create(['name' => 'teacher',]);
+        $guestrole = Role::create(['name' => 'guest',]);
 
-        $guest = factory(\App\User::class)->create();
-        $guest->roles()->attach($guestRole);
+        //Blocks
+        for ($i = 0; $i < 12; $i++) {
+            Block::create();
+        }
+        //Periods
+        for ($i = 0; $i < 4; $i++) {
+            Period::create();
+        }
+        $guest = factory(User::class)->create();
+        $guest->roles()->attach($guestrole);
+
+        $teachers = factory(User::class, 10)->create()->each(function ($user) use ($teacher) {
+            $user->roles()->attach($teacher);
+        });
+
+        factory(Module::class, 10)->create([
+            'overseer' => $teachers[random_int(0, $teachers->count() - 1)]->id,
+            'taught_by' => $teachers[random_int(0, $teachers->count() - 1)]->id,
+            'followed_by' => User::find(1)->id,
+            'is_finished' => 0,
+            'study_points' => 1
+        ]);
+
+        //Tags
+        $fun = Tag::create(['tag' => 'fun']);
+        $boring = Tag::create(['tag' => 'boring']);
+        $timeconsuming = Tag::create(['tag' => 'timeconsuming']);
+
+        //Examtypes
+        //To use ID's just call ExamType::EXAM etc.
+        ExamType::create(['type' => 'exam']);
+        ExamType::create(['type' => 'assessment']);
+        ExamType::create(['type' => 'assignment']);
+
+        factory(Exam::class, 10)->create([
+            //If you want to set a specific type or module, do it here
+            //By nature these ID's will be randomnized
+            'examtype_id' => ExamType::ASSIGNMENT,
+            'module_id' => 1
+        ])->each(function ($exam) use ($fun, $boring, $timeconsuming) {
+            //Just an example, by nature it won't have any tag
+            //$exam->tags()->attach($fun);
+        });
 
         $this->browse(function ($browser) {
 
@@ -39,41 +84,42 @@ class DeadlineManagerTest extends DuskTestCase
                 ->visit('/deadlines')
                 ->screenshot('deadlinepage');
 
-            $elements = $browser->visit('/deadlines')
-                ->elements('.table tr');
-
-            foreach ($elements as $element) {
-                $subElements = collect($element->findElements(WebDriverBy::xpath('*')));
-
-                if ($subElements->slice(1, 1)->first()->getText() === 'iets') {
-
-                }
-            }
+//            $elements = $browser->visit('/deadlines')
+//                ->elements('.table tr');
+//
+//            foreach ($elements as $element) {
+//                $subElements = collect($element->findElements(WebDriverBy::xpath('*')));
+//
+//                if ($subElements->slice(1, 1)->first()->getText() === 'iets') {
+//
+//                }
+//            }
         });
     }
 
-    public function PakAanDieData(){
+    protected function PakAanDieData()
+    {
         //Roles, User, Module, Block and Period
         //Roles
         Role::create(['name' => 'admin',]);
         $teacher = Role::create(['name' => 'teacher',]);
         $guestrole = Role::create(['name' => 'guest',]);
         //Blocks
-        for ($i = 0; $i<12;$i++){
+        for ($i = 0; $i < 12; $i++) {
             Block::create();
         }
         //Periods
-        for ($i = 0; $i<4;$i++){
+        for ($i = 0; $i < 4; $i++) {
             Period::create();
         }
         $guest = factory(User::class)->create();
         $guest->roles()->attach($guestrole);
-        $teachers = factory(User::class, 10)->create()->each(function ($user) use ($teacher){
+        $teachers = factory(User::class, 10)->create()->each(function ($user) use ($teacher) {
             $user->roles()->attach($teacher);
         });
         factory(Module::class, 10)->create([
-            'overseer' => $teachers[random_int(0, $teachers->count()-1)]->id,
-            'taught_by' => $teachers[random_int(0, $teachers->count()-1)]->id,
+            'overseer' => $teachers[random_int(0, $teachers->count() - 1)]->id,
+            'taught_by' => $teachers[random_int(0, $teachers->count() - 1)]->id,
             'followed_by' => $guest->id,
             'is_finished' => 1,
             'study_points' => 1
@@ -93,7 +139,7 @@ class DeadlineManagerTest extends DuskTestCase
             //By nature these ID's will be randomnized
             'examtype_id' => ExamType::ASSIGNMENT,
 //            'module_id' => themoduleidyouwant
-        ])->each(function($exam) use($fun,$boring,$timeconsuming){
+        ])->each(function ($exam) use ($fun, $boring, $timeconsuming) {
             //Just an example, by nature it won't have any tag
             $exam->tags()->attach($fun);
         });
