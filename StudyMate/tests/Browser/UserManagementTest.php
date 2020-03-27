@@ -28,7 +28,7 @@ class UserManagementTest extends DuskTestCase
         $admin->roles()->attach($adminRole);
 
         $this->browse(function ($browser) {
-            $browser->visit('/login')
+            $browser
                 ->loginAs(User::find(2))
                 ->assertAuthenticated()
                 ->visit('/admin/users')
