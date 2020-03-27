@@ -48,11 +48,14 @@ class DeadlineManagerTest extends DuskTestCase
         });
 
         factory(Module::class, 10)->create([
+            'name' =>  'test',
             'overseer' => $teachers[random_int(0, $teachers->count() - 1)]->id,
             'taught_by' => $teachers[random_int(0, $teachers->count() - 1)]->id,
             'followed_by' => User::find(1)->id,
-            'is_finished' => 0,
-            'study_points' => 1
+            'block_id' => 1,
+            'period_id' => 1,
+            'is_finished' => false,
+            'study_points' => 5
         ]);
 
         //Tags
@@ -70,14 +73,13 @@ class DeadlineManagerTest extends DuskTestCase
             //If you want to set a specific type or module, do it here
             //By nature these ID's will be randomnized
             'examtype_id' => ExamType::ASSIGNMENT,
-            'module_id' => 1
+            //'module_id' => 1
         ])->each(function ($exam) use ($fun, $boring, $timeconsuming) {
             //Just an example, by nature it won't have any tag
             //$exam->tags()->attach($fun);
         });
 
         $this->browse(function ($browser) {
-
             $browser->visit('/login')
                 ->loginAs(User::find(1))
                 ->assertAuthenticated()
