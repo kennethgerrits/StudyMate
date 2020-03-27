@@ -54,10 +54,9 @@ class DeadlineController extends Controller
             }
             $tag = str_replace(['[', ']'], '', $tag);
             $tag = explode(',', $tag);
-            ExamTag::create([
-                'exam_id' => $tag[0],
-                'tag_id' => $tag[1]
-            ]);
+            $exam = Exam::where('id', '=', $tag[0])->first();
+            $tag = Tag::where('id', '=', $tag[1])->first();
+            $exam->tags()->attach($tag);
         }
         if ($request->finished != null) {
             foreach ($request->finished as $finishedid) {

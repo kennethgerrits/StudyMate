@@ -10,6 +10,7 @@ use App\Period;
 use App\Role;
 use App\Tag;
 use App\User;
+use Carbon\Carbon;
 use Facebook\WebDriver\WebDriverBy;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
@@ -73,16 +74,18 @@ class DeadlineManagerTest extends DuskTestCase
             //If you want to set a specific type or module, do it here
             //By nature these ID's will be randomnized
             'examtype_id' => ExamType::ASSIGNMENT,
+            //'is_finished' => false,
+            //'deadline_date' => Carbon::now()->addDays(1)->toDate()
             //'module_id' => 1
         ])->each(function ($exam) use ($fun, $boring, $timeconsuming) {
-            //Just an example, by nature it won't have any tag
-            //$exam->tags()->attach($fun);
+//            Just an example, by nature it won't have any tag
+            $exam->tags()->attach($fun);
         });
-
-        $this->browse(function ($browser) {
+        $this->browse(function ($browser) use($guest){
             $browser->visit('/login')
-                ->loginAs(User::find(1))
+                ->loginAs($guest)
                 ->assertAuthenticated()
+                ->screenshot('Afterlogin')
                 ->visit('/deadlines')
                 ->screenshot('deadlinepage');
 

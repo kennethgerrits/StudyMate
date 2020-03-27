@@ -13,7 +13,7 @@ class CreateExamTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('exam_tags', function (Blueprint $table) {
+        Schema::create('exam_tag', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('exam_id');
             $table->unsignedBigInteger('tag_id');
@@ -31,6 +31,6 @@ class CreateExamTagsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exam_tags');
+        Schema::dropIfExists('exam_tag');
     }
 }

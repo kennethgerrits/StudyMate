@@ -15,7 +15,7 @@ class ExamsTableSeeder extends Seeder
     public function run()
     {
         DB::table('exams')->delete();
-        DB::table('exam_tags')->delete();
+        DB::table('exam_tag')->delete();
 
         $e1 = Exam::create([
             'description' => 'PROG6 Assessment',
