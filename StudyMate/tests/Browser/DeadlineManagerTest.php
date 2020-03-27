@@ -154,7 +154,8 @@ class DeadlineManagerTest extends DuskTestCase
                 ->loginAs(User::find(1))
                 ->assertAuthenticated()
                 ->visit('/deadlines')
-                ->assertSee('403');
+                ->assertSee('403')
+                ->assertSee('This action is unauthorized.');
         });
     }
 }

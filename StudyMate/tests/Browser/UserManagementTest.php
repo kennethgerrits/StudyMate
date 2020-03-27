@@ -91,7 +91,8 @@ class UserManagementTest extends DuskTestCase
                 ->loginAs(User::find(1))
                 ->assertAuthenticated()
                 ->visit('/admin/users')
-                ->assertSee('403');
+                ->assertSee('403')
+                ->assertSee('This action is unauthorized.');
         });
     }
 }
