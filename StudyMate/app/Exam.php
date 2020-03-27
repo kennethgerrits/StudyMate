@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Crypt;
 
 class Exam extends Model
 {
@@ -26,6 +27,20 @@ class Exam extends Model
     public function tags()
     {
         return $this->belongsToMany('App\Tag');
+    }
+
+    /*Encryption Mutators*/
+    public function setAppendixAttribute($value)
+    {
+        $this->attributes['Appendix'] = Crypt::encryptString($value);
+    }
+
+    public function getAppendixAttribute($value)
+    {
+        if($value == null) {
+            return;
+        }
+        return Crypt::decryptString($value);
     }
 
 }
