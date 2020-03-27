@@ -46,7 +46,7 @@
                                         <td>{{$exam->type()->first()->type}}</td>
                                         <td>{{$exam->deadline_date}}</td>
                                         <td>
-                                            <select class="form-control" name="tags[]">
+                                            <select dusk="tagsdropdown" class="form-control" name="tags[]">
                                                 <option></option>
                                                 @foreach ($tags as $tag)
                                                     @if(!$exam->tags()->get()->contains($tag->id))
@@ -61,7 +61,7 @@
                                         </td>
                                         <td>
                                             <div class="form-check">
-                                                <input type="checkbox" class="btn btn-danger" name="finished[]" value="{{$exam->id}}"
+                                                <input dusk="finalizeExamBtn" type="checkbox" class="btn btn-danger" name="finished[]" value="{{$exam->id}}"
                                                        @if($exam->is_finished) checked @endif/>
                                             </div>
                                         </td>
@@ -69,7 +69,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            <button type="submit" class="btn btn-primary float-right mt-3">Save changes</button>
+                            <button dusk="saveDeadlineChangesBtn" type="submit" class="btn btn-primary float-right mt-3">Save changes</button>
                         </form>
                     </div>
                 </div>
