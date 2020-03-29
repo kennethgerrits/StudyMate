@@ -95,30 +95,6 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="period_id" class="col-md-2 col-form-label text-md-right">{{ __('Period') }}</label>
-
-                                <div class="col-md-6">
-                                    <select class="form-control" name="period_id">
-                                        <option value="{{$module->period_id}}">{{$module->period_id}}</option>
-
-                                        @foreach ($periods as $period)
-                                            @if($period->id != $module->period_id)
-                                                <option value="{{ $period->id}}">
-                                                    {{ $period->id }}
-                                                </option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-
-                                    @error('period_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
                                 <label for="study_points" class="col-md-2 col-form-label text-md-right">{{ __('Study points') }}</label>
 
                                 <div class="col-md-6">

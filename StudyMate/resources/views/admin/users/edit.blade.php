@@ -41,14 +41,13 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="roles" class="col-md-2 col-form-label text-md-right">Is admin</label>
+                                <label for="roles" class="col-md-2 col-form-label text-md-right">Roles</label>
                                 <div class="col-md-6">
                                     @foreach($roles as $role)
-                                        <div class="form-check">
-                                            <input type="checkbox" name="roles[]" value="{{$role->id}}"
-                                                   @if($user->roles->pluck('id')->contains($role->id)) checked @endif>
-                                        </div>
-                                        @if($user->hasRole('teacher') && $role->id != 3)
+                                        @if($user->hasRole('teacher'))
+                                            @if($role->id == 3)
+                                                @continue
+                                            @endif
                                             <div class="form-check">
                                                 <input type="checkbox" name="roles[]" value="{{$role->id}}"
                                                        @if($user->roles->pluck('id')->contains($role->id))
@@ -56,9 +55,17 @@
                                                        disabled="true"
                                                        @endif
                                                        checked @endif>
+                                                <label>{{$role->name}}</label>
+                                                @if($role->id == 2)
+                                                    <input type="hidden" name="roles[]" value="{{$role->id}}"/>
+                                                @endif
                                             </div>
+                                            @continue
                                         @endif
-                                        @if($user->hasRole('guest') && $role->id != 2)
+                                        @if($user->hasRole('guest'))
+                                            @if($role->id == 2)
+                                                @continue
+                                            @endif
                                             <div class="form-check">
                                                 <input type="checkbox" name="roles[]" value="{{$role->id}}"
                                                        @if($user->roles->pluck('id')->contains($role->id))
@@ -66,10 +73,18 @@
                                                        disabled="true"
                                                        @endif
                                                        checked @endif>
+                                                <label>{{$role->name}}</label>
+                                                @if($role->id == 3)
+                                                    <input type="hidden" name="roles[]" value="{{$role->id}}"/>
+                                                @endif
                                             </div>
+                                            @continue
                                         @endif
-
-                                        <label>{{$role->name}}</label>
+                                        <div class="form-check">
+                                            <input type="checkbox" name="roles[]" value="{{$role->id}}"
+                                                   @if($user->roles->pluck('id')->contains($role->id)) checked @endif>
+                                            <label>{{$role->name}}</label>
+                                        </div>
                                     @endforeach
                                 </div>
                             </div>

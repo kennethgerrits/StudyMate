@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Exam;
-use App\ExamTag;
-use App\ExamType;
 use App\Tag;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -14,6 +12,7 @@ class DeadlineController extends Controller
     public function index($column = null, $order = null, $table = null)
     {
         $lastorder = 'asc';
+
         if ($table != null) {
             if ($order == 'asc') {
                 $exams = Exam::with($table)
@@ -37,7 +36,9 @@ class DeadlineController extends Controller
         } else {
             $exams = Exam::where('is_finished', '=', false)->where('deadline_date', '>=', Carbon::now()->toDate())->get();
         }
+        
         $tags = Tag::all();
+
         return view('deadlines.index', [
             'exams' => $exams,
             'tags' => $tags,
@@ -48,6 +49,7 @@ class DeadlineController extends Controller
     public function saveChanges(Request $request)
     {
         $delimiters = collect(['[', ']']);
+
         foreach ($request->tags as $tag) {
             if ($tag == null) {
                 continue;
@@ -58,6 +60,7 @@ class DeadlineController extends Controller
             $tag = Tag::where('id', '=', $tag[1])->first();
             $exam->tags()->attach($tag);
         }
+
         if ($request->finished != null) {
             foreach ($request->finished as $finishedid) {
                 $target = Exam::where('id', '=', $finishedid)->first();
@@ -65,6 +68,7 @@ class DeadlineController extends Controller
                 $target->save();
             }
         }
+
         return redirect()->route('getDeadlineManagerIndex');
     }
 

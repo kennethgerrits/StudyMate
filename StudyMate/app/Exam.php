@@ -37,7 +37,7 @@ class Exam extends Model
 
     public function getAppendixAttribute($value)
     {
-        if($value == null) {
+        if ($value == null) {
             return;
         }
         return Crypt::decryptString($value);

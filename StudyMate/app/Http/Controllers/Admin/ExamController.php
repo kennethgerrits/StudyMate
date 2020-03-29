@@ -7,7 +7,6 @@ use App\ExamType;
 use App\Http\Controllers\Controller;
 use App\Module;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 
 class ExamController extends Controller

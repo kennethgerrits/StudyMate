@@ -39,10 +39,10 @@
                     @endif
                 </div>
                 <div class="col-md-3">
-                @include('dashboard.partials.modules-all')
+                    @include('dashboard.partials.modules-all')
                 </div>
                 <div class="col-md-4">
-                @include('dashboard.partials.blocksummary')
+                    @include('dashboard.partials.blocksummary')
                 </div>
             </div>
         </div>

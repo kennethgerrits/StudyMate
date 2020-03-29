@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Block;
 use App\Http\Controllers\Controller;
 use App\Module;
-use App\Period;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -38,12 +37,10 @@ class ModulesController extends Controller
         }
 
         $blocks = Block::all();
-        $periods = Period::all();
 
         return view('admin.modules.create', [
             'teachers' => $teachers,
-            'blocks' => $blocks,
-            'periods' => $periods
+            'blocks' => $blocks
         ]);
     }
 
@@ -60,7 +57,6 @@ class ModulesController extends Controller
             'overseer' => $request['overseer'],
             'taught_by' => $request['taught_by'],
             'block_id' => $request['block_id'],
-            'period_id' => $request['period_id'],
             'study_points' => $request['study_points'],
             'is_finished' => $request['is_finished'],
         ]);
@@ -87,13 +83,11 @@ class ModulesController extends Controller
         }
 
         $blocks = Block::all();
-        $periods = Period::all();
 
         return view('admin.modules.edit')->with([
             'module' => $module,
             'teachers' => $teachers,
-            'blocks' => $blocks,
-            'periods' => $periods
+            'blocks' => $blocks
         ]);
     }
 
@@ -112,7 +106,6 @@ class ModulesController extends Controller
         $module->overseer = $request->overseer;
         $module->taught_by = $request->taught_by;
         $module->block_id = $request->block_id;
-        $module->period_id = $request->period_id;
         $module->study_points = $request->study_points;
         $module->is_finished = $request->is_finished;
 

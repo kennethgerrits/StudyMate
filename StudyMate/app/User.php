@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Crypt;
@@ -29,11 +28,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function roles()
-    {
-        return $this->belongsToMany('App\Role');
-    }
-
     public function roleUser()
     {
         return $this->hasMany('App\RoleUser');
@@ -47,6 +41,11 @@ class User extends Authenticatable
         return false;
     }
 
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role');
+    }
+
     public function hasRole($role)
     {
         if ($this->roles()->where('name', $role)->first()) {
@@ -55,21 +54,17 @@ class User extends Authenticatable
         return false;
     }
 
-    public function modules()
-    {
-        return $this->hasMany('App\Module', 'followed_by', 'id');
-    }
-
     public function teacherModules()
     {
         return $this->hasMany('App\Module', 'taught_by', 'id');
     }
 
-    /*Encryption Mutators*/
     public function setNameAttribute($value)
     {
         $this->attributes['name'] = Crypt::encryptString($value);
     }
+
+    /*Encryption Mutators*/
 
     public function getNameAttribute($value)
     {
@@ -84,28 +79,6 @@ class User extends Authenticatable
     public function getEmailAttribute($value)
     {
         return Crypt::decryptString($value);
-    }
-
-    public function getMaxEcAttribute()
-    {
-        $maxEC = 0;
-        foreach ($this->modules()->get() as $module) {
-            $maxEC += $module->study_points;
-        }
-
-        return $maxEC;
-    }
-
-    public function getAchievedEcAttribute()
-    {
-        $achievedEC = 0;
-        foreach ($this->modules()->get() as $module) {
-            if ($module->is_finished) {
-                $achievedEC += $module->study_points;
-            }
-        }
-
-        return $achievedEC;
     }
 
     public function getProgressPercentageAttribute()
@@ -154,5 +127,32 @@ class User extends Authenticatable
         }
 
         return $barwidth;
+    }
+
+    public function getMaxEcAttribute()
+    {
+        $maxEC = 0;
+        foreach ($this->modules()->get() as $module) {
+            $maxEC += $module->study_points;
+        }
+
+        return $maxEC;
+    }
+
+    public function modules()
+    {
+        return $this->hasMany('App\Module', 'followed_by', 'id');
+    }
+
+    public function getAchievedEcAttribute()
+    {
+        $achievedEC = 0;
+        foreach ($this->modules()->get() as $module) {
+            if ($module->is_finished) {
+                $achievedEC += $module->study_points;
+            }
+        }
+
+        return $achievedEC;
     }
 }

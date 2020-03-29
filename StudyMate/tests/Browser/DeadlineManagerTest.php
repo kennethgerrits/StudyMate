@@ -6,14 +6,10 @@ use App\Block;
 use App\Exam;
 use App\ExamType;
 use App\Module;
-use App\Period;
 use App\Role;
 use App\Tag;
 use App\User;
-use Carbon\Carbon;
-use Facebook\WebDriver\WebDriverBy;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
 class DeadlineManagerTest extends DuskTestCase
@@ -32,9 +28,6 @@ class DeadlineManagerTest extends DuskTestCase
 
         for ($i = 0; $i < 12; $i++) {
             Block::create();
-        }
-        for ($i = 0; $i < 4; $i++) {
-            Period::create();
         }
 
         $guest = factory(User::class)->create();
@@ -89,9 +82,6 @@ class DeadlineManagerTest extends DuskTestCase
 
         for ($i = 0; $i < 12; $i++) {
             Block::create();
-        }
-        for ($i = 0; $i < 4; $i++) {
-            Period::create();
         }
 
         $guest = factory(User::class)->create();

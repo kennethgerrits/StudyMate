@@ -34,6 +34,7 @@ class DashboardController extends Controller
         $maxEC = 0;
         $achievedEC = 0;
         $barwidth = '';
+
         foreach ($guest->modules()->where('block_id', '=', $block_id)->get() as $module) {
             $maxEC += $module->study_points;
             if ($module->is_finished) {

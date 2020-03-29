@@ -4,13 +4,14 @@ namespace Tests\Unit;
 
 use App\Role;
 use App\User;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\Gate;
 use Tests\TestCase;
 
 class DeadlineManagerTest extends TestCase
 {
     use DatabaseMigrations;
+
     /**
      * A basic unit test example.
      *

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Module;
-use App\User;
 use App\Role;
+use App\User;
 use Gate;
 use Illuminate\Http\Request;
 
@@ -78,7 +78,6 @@ class UsersController extends Controller
                 return $q->where('taught_by', '=', $user->id)->update(['taught_by' => null]);
             } else {
                 return $q->where('followed_by', '=', $user->id)->update(['followed_by' => null]);
-
             }
         });
         if ($request->modules != null) {
@@ -99,7 +98,6 @@ class UsersController extends Controller
         } else {
             $request->session()->flash('error', $user->name.' could not be updated.');
         }
-
 
         return redirect()->route('admin.users.index');
     }

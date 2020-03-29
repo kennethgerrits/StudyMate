@@ -4,7 +4,6 @@ namespace Tests\Browser;
 
 use App\Block;
 use App\Module;
-use App\Period;
 use App\Role;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -33,9 +32,6 @@ class DashboardTest extends DuskTestCase
             Block::create();
         }
         //Periods
-        for ($i = 0; $i < 4; $i++) {
-            Period::create();
-        }
         $guest = factory(User::class)->create();
         $guest->roles()->attach($guestrole);
         $teachers = factory(User::class, 10)->create()->each(function ($user) use ($teacher) {
@@ -80,10 +76,6 @@ class DashboardTest extends DuskTestCase
         for ($i = 0; $i < 12; $i++) {
             Block::create();
         }
-        //Periods
-        for ($i = 0; $i < 4; $i++) {
-            Period::create();
-        }
         $guest = factory(User::class)->create();
         $guest->roles()->attach($guestrole);
         $this->browse(function (Browser $browser) {
@@ -115,10 +107,6 @@ class DashboardTest extends DuskTestCase
         for ($i = 0; $i < 12; $i++) {
             Block::create();
         }
-        //Periods
-        for ($i = 0; $i < 4; $i++) {
-            Period::create();
-        }
         $guest = factory(User::class)->create();
         $guest->roles()->attach($guestrole);
         $teachers = factory(User::class, 10)->create()->each(function ($user) use ($teacher) {
@@ -131,8 +119,7 @@ class DashboardTest extends DuskTestCase
             'followed_by' => $guest->id,
             'is_finished' => 1,
             'study_points' => 1,
-            'block_id' => 1,
-            'period_id' => 1
+            'block_id' => 1
         ]);
         $this->browse(function (Browser $browser) {
             $browser->visit('/dashboard')

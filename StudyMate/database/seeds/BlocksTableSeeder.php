@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Block;
+use Illuminate\Database\Seeder;
 
 class BlocksTableSeeder extends Seeder
 {
