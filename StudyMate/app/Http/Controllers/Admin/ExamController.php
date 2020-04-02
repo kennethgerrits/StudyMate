@@ -170,7 +170,6 @@ class ExamController extends Controller
     public function downloadZipfile($examid)
     {
         $filename = Exam::where('id', '=', $examid)->pluck('appendix')->first();
-        //dd($filename);
         return response()->download(storage_path('app\public\exam_files\\'.$filename));
     }
 }

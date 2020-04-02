@@ -100,8 +100,6 @@ class ModulesController extends Controller
      */
     public function update(Request $request, Module $module)
     {
-        //$module->sync($request->modules);
-
         $module->name = $request->name;
         $module->overseer = $request->overseer;
         $module->taught_by = $request->taught_by;
