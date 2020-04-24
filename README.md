@@ -1,2 +1,2 @@
 # StudyMate
-Avans jaar 2- eindopdracht websphp
+Avans jaar 2 - eindopdracht websphp
